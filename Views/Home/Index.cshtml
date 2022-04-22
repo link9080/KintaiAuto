@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="col-5 ml-3">
+        
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>氏名</th>
+                    <th>得意言語</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in ViewBag["str"]) { }
+                <tr>
+                    <td>1</td>
+                    <td>エンジニア1</td>
+                    <td>PHP</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>エンジニア2</td>
+                    <td>Ruby</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>エンジニア3</td>
+                    <td>VBA</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>エンジニア4</td>
+                    <td>JAVA</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>エンジニア5</td>
+                    <td>Python</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
