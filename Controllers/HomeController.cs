@@ -1,6 +1,7 @@
 ﻿using AngleSharp;
 using AngleSharp.Html.Dom;
 using KintaiAuto.Models;
+using KintaiAuto.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -31,8 +32,8 @@ namespace KintaiAuto.Controllers
         public IActionResult Index()
         {
             var login = LoginReadText();
-            Main();
-            return View();
+            var model = Main();
+            return View(model.Result);
         }
 
         public IActionResult Privacy()
@@ -40,9 +41,11 @@ namespace KintaiAuto.Controllers
             return View();
         }
 
-        private async void Main()
+        private async Task<KintaiView>  Main()
         {
             var urlstring = "https://app.recoru.in/ap/";
+            var model = new KintaiView();
+            model.Kintais = new List<Kintai>();
 
             WebClient wc = new WebClient();
             try
@@ -60,11 +63,17 @@ namespace KintaiAuto.Controllers
                 List<string> str = new List<string>();
                 foreach (var item in document.QuerySelectorAll("a"))
                 {
-                    Console.WriteLine(item.TextContent.Trim());
-                    str.Add(item.TextContent.Trim());
+                    var kintai = new Kintai();
+                    kintai.Date = DateTime.Now;
+                    kintai.StrTime = DateTime.Now.ToString();
+                    kintai.EndTime = item.TextContent;
+                    kintai.KyuStrTime = item.ToString();
+                    kintai.KyuEndTime = item.InnerHtml;
+                    kintai.RakuPtn = "test";
+                    model.Kintais.Add(kintai);
 
                 }
-                ViewBag["str"] = str;
+                return model;
 
             }
             catch (System.Exception)
