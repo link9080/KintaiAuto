@@ -14,7 +14,7 @@
         <input type="date"  />
         <button type="submit">取得</button>
         }
-        <table class="table table-sm">
+        <table class="table table-sm table-responsive-sm table-striped">
             <thead>
                 <tr>
                     <th>日付</th>
@@ -26,17 +26,31 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Kintais)
+                @for (var i = 0;i < Model.Kintais.Count();i++)
                 {
                 <tr>
-                    <td>@item.StrTime</td>
-                    <td>@item.EndTime</td>
-                    <td>@item.KyuStrTime</td>
-                    <td>@item.KyuEndTime</td>
-                    <td>@item.RakuPtn</td>
+                    <td>
+                        @(Model.Kintais[i].Date.ToString("d"))
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Kintais[i].StrTime, new { })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Kintais[i].EndTime, new { })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Kintais[i].KyuStrTime, new { })
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.Kintais[i].KyuEndTime, new { })
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;" })
+                    </td>
                 </tr>
                 }
             </tbody>
         </table>
+        <div style="text-align:right;"><button type="submit">反映</button></div>
     </div>
 </div>

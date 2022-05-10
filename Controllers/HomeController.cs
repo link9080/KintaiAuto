@@ -3,6 +3,7 @@ using AngleSharp.Html.Dom;
 using KintaiAuto.Models;
 using KintaiAuto.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,9 @@ namespace KintaiAuto.Controllers
                 // Console.WriteLine(document.Title);
 
                 // foreach (var item in document.QuerySelectorAll("h1.thumb"))
-                List<string> str = new List<string>();
+                List<string> str = new List<string>() { "test"};
+                var rakuPtn = new SelectList(str);
+                var i = 0;
                 foreach (var item in document.QuerySelectorAll("a"))
                 {
                     var kintai = new Kintai();
@@ -69,8 +72,10 @@ namespace KintaiAuto.Controllers
                     kintai.EndTime = item.TextContent;
                     kintai.KyuStrTime = item.ToString();
                     kintai.KyuEndTime = item.InnerHtml;
-                    kintai.RakuPtn = "test";
+                    kintai.RakuPtn = "";
+                    ViewData["Kintais["+ i+"].RakuPtn"] = rakuPtn;
                     model.Kintais.Add(kintai);
+                    i++;
 
                 }
                 return model;
