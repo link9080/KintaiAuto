@@ -1,5 +1,7 @@
 ﻿using AngleSharp;
+using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
+using AngleSharp.Js;
 using KintaiAuto.Models;
 using KintaiAuto.ViewModel;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +16,10 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using OpenQA.Selenium;
+using System.Threading;
 
 namespace KintaiAuto.Controllers
 {
@@ -23,18 +29,36 @@ namespace KintaiAuto.Controllers
         private readonly ILogger<HomeController> _logger;
         const string RECOLU = "[Recolu]";
         const string RAKURAKU = "[RakuRaku]";
-
-
+        LoginsInfo recolu = new LoginsInfo();
+        ChromeDriver chrome = new ChromeDriver();
+        LoginsInfo rakuraku = new LoginsInfo();
+       
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult>  Index()
         {
-            var login = LoginReadText();
-            var model = Main();
-            return View(model.Result);
+            LoginReadText();
+            var model = await Main();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update([Bind()] KintaiView model)
+        {
+
+            Debug.WriteLine(model.Kintais.Count());
+            return View("Index",model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> serch()
+        {
+            LoginReadText();
+            var model = await Main();
+            return View("Index",model);
         }
 
         public IActionResult Privacy()
@@ -47,53 +71,89 @@ namespace KintaiAuto.Controllers
             var urlstring = "https://app.recoru.in/ap/";
             var model = new KintaiView();
             model.Kintais = new List<Kintai>();
+            
 
             WebClient wc = new WebClient();
             try
             {
-                string htmldocs = wc.DownloadString(urlstring);
+                //string htmldocs = wc.DownloadString(urlstring);
                 // Console.WriteLine(htmldocs);
 
-                var config = Configuration.Default;
+                var config = Configuration.Default.WithDefaultLoader().WithDefaultCookies().WithJs();
                 var context = BrowsingContext.New(config);
-                var document = await context.OpenAsync(req => req.Content(htmldocs));
 
-                // Console.WriteLine(document.Title);
+                var wait = new WebDriverWait(chrome, TimeSpan.FromSeconds(60));
+                chrome.Url = urlstring;
 
-                // foreach (var item in document.QuerySelectorAll("h1.thumb"))
+                // 企業IDを入力
+                var kigyoElement = wait.Until(drv => drv.FindElement(By.XPath("//input[@id='contractId']")));
+                kigyoElement.SendKeys(recolu.Kigyo);
+                //kigyoElement.SendKeys(Keys.Enter);
+
+                // メールアドレスを入力
+                var mailElement = wait.Until(drv => drv.FindElement(By.XPath("//input[@id='authId']")));
+                mailElement.SendKeys(recolu.ID);
+                //kigyoElement.SendKeys(Keys.Enter);
+
+                // passを入力
+                var passElement = wait.Until(drv => drv.FindElement(By.XPath("//input[@id='password']")));
+                passElement.SendKeys(recolu.PASS);
+                passElement.SendKeys(Keys.Enter);
+
+                Thread.Sleep(2 * 1000);
+
+                //ログイン後システム日の表が表示される日付を取得
+                var Days = wait.Until(drv => drv.FindElements(By.ClassName("item-day")));
+
+                //開始
+                var start = wait.Until(drv => drv.FindElements(By.ClassName("item-worktimeStart")));
+
+                //終了
+                var end = wait.Until(drv => drv.FindElements(By.ClassName("item-worktimeEnd")));
+
+                //休憩
+                var kyu = wait.Until(drv => drv.FindElements(By.ClassName("item-breaktime")));
+
+                //Thread.Sleep(2 * 1000);
+
                 List<string> str = new List<string>() { "test"};
                 var rakuPtn = new SelectList(str);
-                var i = 0;
-                foreach (var item in document.QuerySelectorAll("a"))
+                for(int i=0;i < Days.Count();i++)
                 {
                     var kintai = new Kintai();
-                    kintai.Date = DateTime.Now;
-                    kintai.StrTime = DateTime.Now.ToString();
-                    kintai.EndTime = item.TextContent;
-                    kintai.KyuStrTime = item.ToString();
-                    kintai.KyuEndTime = item.InnerHtml;
-                    kintai.RakuPtn = "";
-                    ViewData["Kintais["+ i+"].RakuPtn"] = rakuPtn;
-                    model.Kintais.Add(kintai);
-                    i++;
-
+                    if(DateTime.TryParse(Days[i].Text,out _))
+                    {
+                        kintai.Date = DateTime.Parse(Days[i].Text);
+                        kintai.StrTime = start[i].Text;
+                        kintai.EndTime = end[i].Text;
+                        kintai.KyuStrTime = kyu[i].Text;
+                        kintai.KyuEndTime = kyu[i].Text;
+                        kintai.RakuPtn = "";
+                        ViewData["Kintais[" + i + "].RakuPtn"] = rakuPtn;
+                        model.Kintais.Add(kintai);
+                    }
+                    else
+                    {
+                        ViewData["Kintais[" + i + "].RakuPtn"] = rakuPtn;
+                        continue;
+                    }
+                    
                 }
+                chromeend();
                 return model;
 
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
-                throw;
+                throw e;
             }
 
 
         }
 
-        private List<List<String>> LoginReadText()
+        private List<LoginsInfo> LoginReadText()
         {
-            List<List<string>> List = new List<List<string>>();
-            List<string> recolu = new List<string>();
-            List<string> rakuraku = new List<string>();
+            List<LoginsInfo> List = new List<LoginsInfo>();
             string chk = string.Empty;
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             using (StreamReader sr = new StreamReader(@"login.txt", Encoding.GetEncoding("Shift_JIS")))
@@ -117,7 +177,7 @@ namespace KintaiAuto.Controllers
                     {
 
                         str = str.Substring(str.IndexOf("[")+1);
-                        recolu.Add(str.Replace("]", ""));
+                        recolu.Kigyo=str.Replace("]", "");
                     }
 
                     if (str.Contains("ID"))
@@ -125,12 +185,12 @@ namespace KintaiAuto.Controllers
                         if (chk == RECOLU)
                         {
                             str =  str.Substring(str.IndexOf("[") + 1);
-                            recolu.Add(str.Replace("]", ""));
+                            recolu.ID = str.Replace("]", "");
 ;                       }
                         else
                         {
                             str = (str.Substring(str.IndexOf("[") + 1));
-                            rakuraku.Add(str.Replace("]", ""));
+                            rakuraku.ID = str.Replace("]", "");
                         }
                     }
                     if (str.Contains("PASS"))
@@ -139,13 +199,13 @@ namespace KintaiAuto.Controllers
                         if (chk == RECOLU)
                         {
                             str = str.Substring(str.IndexOf("[") + 1);
-                            recolu.Add(str.Replace("]", ""));
+                            recolu.PASS = str.Replace("]", "");
                             ;
                         }
                         else
                         {
                             str = (str.Substring(str.IndexOf("[") + 1));
-                            rakuraku.Add(str.Replace("]", ""));
+                            rakuraku.PASS = str.Replace("]", "");
                         }
                     }
 
@@ -162,6 +222,12 @@ namespace KintaiAuto.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private void chromeend()
+        {
+            chrome.Quit();
+            chrome.Dispose();
         }
     }
 }

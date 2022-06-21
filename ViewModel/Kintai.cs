@@ -18,6 +18,16 @@ namespace KintaiAuto.ViewModel
         public string RakuPtn { get; set; }
 
     }
+    public class LoginsInfo
+    {
+        public String  Kigyo { get; set; }
+
+        public string ID { get; set; }
+
+        public string PASS { get; set; }
+
+
+    }
 
     public class KintaiView
     {

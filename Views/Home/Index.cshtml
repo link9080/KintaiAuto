@@ -1,6 +1,6 @@
 ﻿@model KintaiAuto.ViewModel.KintaiView
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "勤怠経費連動";
 
 }
 
@@ -8,49 +8,58 @@
     <h1 class="display-4">勤怠経費連動</h1>
     @*<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
     <div class="col-12">
-        @using (Html.BeginForm("serch", "Index"))
+        @using (Html.BeginForm("serch", "Home"))
         {
-        <p id="YearMonth">年月</p>
-        <input type="date"  />
-        <button type="submit">取得</button>
+            <input type="date" />
+            <button type="submit">取得</button>
         }
-        <table class="table table-sm table-responsive-sm table-striped">
-            <thead>
-                <tr>
-                    <th>日付</th>
-                    <th>開始</th>
-                    <th>終了</th>
-                    <th>休憩開始</th>
-                    <th>休憩終了</th>
-                    <th>パターン</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for (var i = 0;i < Model.Kintais.Count();i++)
-                {
-                <tr>
-                    <td>
-                        @(Model.Kintais[i].Date.ToString("d"))
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.Kintais[i].StrTime, new { })
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.Kintais[i].EndTime, new { })
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.Kintais[i].KyuStrTime, new { })
-                    </td>
-                    <td>
-                        @Html.EditorFor(model => model.Kintais[i].KyuEndTime, new { })
-                    </td>
-                    <td>
-                        @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;" })
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
-        <div style="text-align:right;"><button type="submit">反映</button></div>
+
+        @using (Html.BeginForm("Update", "Home"))
+        {
+            <table class="table table-sm table-responsive-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>日付</th>
+                        <th>開始</th>
+                        <th>終了</th>
+                        <th>休憩開始</th>
+                        <th>休憩終了</th>
+                        <th>パターン</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Kintais.Count(); i++)
+                    {
+                        if (Model.Kintais[i].RakuPtn != null)
+                        {
+                            <tr>
+                                <td>
+                                    @(Model.Kintais[i].Date.ToString("d"))
+                                    @Html.HiddenFor(model => model.Kintais[i].Date)
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Kintais[i].StrTime, new { })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Kintais[i].EndTime, new { })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Kintais[i].KyuStrTime, new { })
+                                </td>
+                                <td>
+                                    @Html.EditorFor(model => model.Kintais[i].KyuEndTime, new { })
+                                </td>
+                                <td>
+                                    @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;" })
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+            <div style="text-align:right;">
+                <button type="submit">反映</button>
+            </div>
+        }
     </div>
 </div>
