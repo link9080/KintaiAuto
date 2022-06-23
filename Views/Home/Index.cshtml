@@ -30,30 +30,29 @@
                 <tbody>
                     @for (var i = 0; i < Model.Kintais.Count(); i++)
                     {
-                        if (Model.Kintais[i].RakuPtn != null)
-                        {
-                            <tr>
-                                <td>
-                                    @(Model.Kintais[i].Date.ToString("d"))
-                                    @Html.HiddenFor(model => model.Kintais[i].Date)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Kintais[i].StrTime, new { })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Kintais[i].EndTime, new { })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Kintais[i].KyuStrTime, new { })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Kintais[i].KyuEndTime, new { })
-                                </td>
-                                <td>
-                                    @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;" })
-                                </td>
-                            </tr>
-                        }
+                        <tr>
+                            <td>
+                                @(Model.Kintais[i].Date.ToString("d"))
+                                @Html.HiddenFor(model => model.Kintais[i].Date)
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Kintais[i].StrTime, new { })
+                                @Html.HiddenFor(model => model.Kintais[i].strID, new { })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Kintais[i].EndTime, new { })
+                                @Html.HiddenFor(model => model.Kintais[i].endID, new { })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Kintais[i].KyuStrTime, new { })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Kintais[i].KyuEndTime, new { })
+                            </td>
+                            <td>
+                                @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;" })
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>

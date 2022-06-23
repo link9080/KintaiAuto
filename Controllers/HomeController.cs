@@ -79,10 +79,14 @@ namespace KintaiAuto.Controllers
                 //string htmldocs = wc.DownloadString(urlstring);
                 // Console.WriteLine(htmldocs);
 
-                var config = Configuration.Default.WithDefaultLoader().WithDefaultCookies().WithJs();
-                var context = BrowsingContext.New(config);
-
+                //var config = Configuration.Default.WithDefaultLoader().WithDefaultCookies().WithJs();
+                //var context = BrowsingContext.New(config);
                 var wait = new WebDriverWait(chrome, TimeSpan.FromSeconds(60));
+
+                //tr固定クラス
+                const string TR_CLASS = "1717-";
+
+                //Recolu
                 chrome.Url = urlstring;
 
                 // 企業IDを入力
@@ -100,7 +104,12 @@ namespace KintaiAuto.Controllers
                 passElement.SendKeys(recolu.PASS);
                 passElement.SendKeys(Keys.Enter);
 
-                Thread.Sleep(2 * 1000);
+                //勤務表へ移動
+                var editpage = wait.Until(drv => drv.FindElement(By.LinkText("勤務表")));
+
+                editpage.Click();
+
+                Thread.Sleep(1 * 1000);
 
                 //ログイン後システム日の表が表示される日付を取得
                 var Days = wait.Until(drv => drv.FindElements(By.ClassName("item-day")));
@@ -111,11 +120,6 @@ namespace KintaiAuto.Controllers
                 //終了
                 var end = wait.Until(drv => drv.FindElements(By.ClassName("item-worktimeEnd")));
 
-                //休憩
-                var kyu = wait.Until(drv => drv.FindElements(By.ClassName("item-breaktime")));
-
-                //Thread.Sleep(2 * 1000);
-
                 List<string> str = new List<string>() { "test"};
                 var rakuPtn = new SelectList(str);
                 for(int i=0;i < Days.Count();i++)
@@ -124,11 +128,26 @@ namespace KintaiAuto.Controllers
                     if(DateTime.TryParse(Days[i].Text,out _))
                     {
                         kintai.Date = DateTime.Parse(Days[i].Text);
-                        kintai.StrTime = start[i].Text;
-                        kintai.EndTime = end[i].Text;
-                        kintai.KyuStrTime = kyu[i].Text;
-                        kintai.KyuEndTime = kyu[i].Text;
-                        kintai.RakuPtn = "";
+
+                        var _tr = wait.Until(drv => drv.FindElement(By.CssSelector($"[class='{TR_CLASS + kintai.Date.ToString("yyyyMMdd")}']")));
+
+                        //休憩開始終了をセット
+                        breakTimeRead(_tr, kintai);
+
+                        Debug.WriteLine(start[i].GetAttribute("id"));
+                        Debug.WriteLine(start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i-1}].worktimeStart")).GetAttribute("id"));
+                        if (start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).GetAttribute("value") != "")
+                        {
+                            kintai.StrTime = start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).GetAttribute("value");
+                            kintai.strID = start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).GetAttribute("id");
+                        }
+
+                        Debug.WriteLine(start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).Text);
+                        if (end[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeEnd")).GetAttribute("value") != "")
+                        {
+                            kintai.EndTime = end[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeEnd")).GetAttribute("value");
+                            kintai.endID = end[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeEnd")).GetAttribute("id");
+                        }
                         ViewData["Kintais[" + i + "].RakuPtn"] = rakuPtn;
                         model.Kintais.Add(kintai);
                     }
@@ -149,6 +168,29 @@ namespace KintaiAuto.Controllers
             }
 
 
+        }
+
+        private void breakTimeRead(IWebElement _tr,Kintai _kintai)
+        {
+            var img = _tr.FindElement(By.TagName("img"));
+            img.Click();
+
+            Thread.Sleep(1 * 1000);
+
+            var kyustr = chrome.FindElement(By.Id("breaktimeDtos[0].breaktimeStart"));
+            _kintai.KyuStrTime = kyustr.GetAttribute("value");
+
+            var kyuend = chrome.FindElement(By.Id("breaktimeDtos[0].breaktimeEnd"));
+            _kintai.KyuEndTime = kyuend.GetAttribute("value");
+
+            //chrome.ExecuteScript("updateBreaktimeEditDialog();");
+
+            //Thread.Sleep(1 * 1000);
+
+            //chrome.SwitchTo().Alert().Accept();
+
+            var close = chrome.FindElement(By.CssSelector($"[class='common-btn close']"));
+            close.Click();
         }
 
         private List<LoginsInfo> LoginReadText()

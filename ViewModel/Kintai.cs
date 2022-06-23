@@ -10,8 +10,10 @@ namespace KintaiAuto.ViewModel
         public DateTime Date { get; set; }
 
         public string StrTime { get; set; }
+        public string strID { get; set; }
         
         public string EndTime { get; set; }
+        public string endID { get; set; }
 
         public string KyuStrTime { get; set; }
         public string KyuEndTime { get; set; }
