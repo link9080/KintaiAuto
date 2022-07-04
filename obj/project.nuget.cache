@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "U7f7CppWaSA2EM+muUSGyylRA4Q1beYGTbj1X4/AFUBVIHvD9qLczwizQrxi/7sGUSGt6GC1ox+8rQ9Sn9AxLQ==",
+  "dgSpecHash": "2WRrLI/Q1B6hKRglT88WME7lY4zQyZvl7Tf7ojaJPj971e7i0ODiPKdRlO2PQ1Q5OVTLDyXPKsHMO3iN4cDziw==",
   "success": true,
   "projectFilePath": "D:\\work\\Kintai_Auto\\KintaiAuto\\KintaiAuto.csproj",
   "expectedPackageFiles": [
@@ -75,7 +75,8 @@
     "C:\\Users\\oldme\\.nuget\\packages\\system.threading.tasks.extensions\\4.0.0\\system.threading.tasks.extensions.4.0.0.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\system.threading.timer\\4.0.1\\system.threading.timer.4.0.1.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\system.xml.readerwriter\\4.0.11\\system.xml.readerwriter.4.0.11.nupkg.sha512",
-    "C:\\Users\\oldme\\.nuget\\packages\\system.xml.xdocument\\4.0.11\\system.xml.xdocument.4.0.11.nupkg.sha512"
+    "C:\\Users\\oldme\\.nuget\\packages\\system.xml.xdocument\\4.0.11\\system.xml.xdocument.4.0.11.nupkg.sha512",
+    "C:\\Users\\oldme\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.25\\microsoft.netcore.app.host.win-x64.3.1.25.nupkg.sha512"
   ],
   "logs": []
 }
