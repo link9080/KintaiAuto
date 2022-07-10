@@ -30,7 +30,8 @@ namespace KintaiAuto.Controllers
         private readonly ILogger<HomeController> _logger;
         const string RECOLU = "[Recolu]";
         const string RAKURAKU = "[RakuRaku]";
-        const string  urlstring = "https://app.recoru.in/ap/";
+        const string  recourl = "https://app.recoru.in/ap/";
+        const string rakuurl = "https://rsclef.rakurakuseisan.jp/CSR9KsE9qUa/";
         LoginsInfo recolu = new LoginsInfo();
         LoginsInfo rakuraku = new LoginsInfo();
        
@@ -46,11 +47,13 @@ namespace KintaiAuto.Controllers
             return View(model);
         }
 
+        #region 反映
         [HttpPost]
         public async Task<IActionResult> Update([Bind()] KintaiView model)
         {
 
             Debug.WriteLine(model.Kintais.Count());
+            var raku = rakuPtn();
             ChromeDriver chrome = new ChromeDriver();
             LoginReadText();
 
@@ -60,13 +63,11 @@ namespace KintaiAuto.Controllers
 
                 //tr固定クラス
                 const string TR_CLASS = "1717-";
-                const string KBN_CLASS = "ID-attendKbn-{0} bg-err form_params";
 
 
                 loginRecolu(chrome, wait);
 
-                List<string> str = new List<string>() { "test" };
-                var rakuPtn = new SelectList(str);
+
                 for (int i = 0;i <  model.Kintais.Count();i++)
                 {
                     
@@ -96,7 +97,7 @@ namespace KintaiAuto.Controllers
                         breakTimewrite(_tr, model.Kintais[i], chrome);
                     }
 
-                    ViewData["Kintais[" + i + "].RakuPtn"] = rakuPtn;
+                    ViewData["Kintais[" + i + "].RakuPtn"] = raku;
 
                 }
                 //更新押下
@@ -117,6 +118,7 @@ namespace KintaiAuto.Controllers
 
             return View("Index",model);
         }
+        #endregion
 
         [HttpPost]
         public async Task<IActionResult> serch()
@@ -135,9 +137,9 @@ namespace KintaiAuto.Controllers
         {
             var model = new KintaiView();
             model.Kintais = new List<Kintai>();
+            var raku = rakuPtn();
             ChromeDriver chrome = new ChromeDriver();
 
-            WebClient wc = new WebClient();
             try
             {
                 var wait = new WebDriverWait(chrome, TimeSpan.FromSeconds(60));
@@ -156,8 +158,6 @@ namespace KintaiAuto.Controllers
                 //終了
                 var end = wait.Until(drv => drv.FindElements(By.ClassName("item-worktimeEnd")));
 
-                List<string> str = new List<string>() { "test"};
-                var rakuPtn = new SelectList(str);
                 for(int i=0;i < Days.Count();i++)
                 {
                     var kintai = new Kintai();
@@ -184,12 +184,12 @@ namespace KintaiAuto.Controllers
                             kintai.EndTime = end[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeEnd")).GetAttribute("value");
                             kintai.endID = end[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeEnd")).GetAttribute("id");
                         }
-                        ViewData["Kintais[" + i + "].RakuPtn"] = rakuPtn;
+                        ViewData["Kintais[" + i + "].RakuPtn"] = raku;
                         model.Kintais.Add(kintai);
                     }
                     else
                     {
-                        ViewData["Kintais[" + i + "].RakuPtn"] = rakuPtn;
+                        ViewData["Kintais[" + i + "].RakuPtn"] = raku;
                         continue;
                     }
                     
@@ -206,34 +206,7 @@ namespace KintaiAuto.Controllers
 
         }
 
-        private void loginRecolu(ChromeDriver chrome,WebDriverWait wait)
-        {
-            //Recolu
-            chrome.Url = urlstring;
-
-            // 企業IDを入力
-            var kigyoElement = wait.Until(drv => drv.FindElement(By.XPath("//input[@id='contractId']")));
-            kigyoElement.SendKeys(recolu.Kigyo);
-            //kigyoElement.SendKeys(Keys.Enter);
-
-            // メールアドレスを入力
-            var mailElement = wait.Until(drv => drv.FindElement(By.XPath("//input[@id='authId']")));
-            mailElement.SendKeys(recolu.ID);
-            //kigyoElement.SendKeys(Keys.Enter);
-
-            // passを入力
-            var passElement = wait.Until(drv => drv.FindElement(By.XPath("//input[@id='password']")));
-            passElement.SendKeys(recolu.PASS);
-            passElement.SendKeys(Keys.Enter);
-
-            //勤務表へ移動
-            var editpage = wait.Until(drv => drv.FindElement(By.LinkText("勤務表")));
-
-            editpage.Click();
-
-            Thread.Sleep(1 * 1000);
-        }
-
+        #region 休憩開始終了
         private void breakTimeRead(IWebElement _tr,Kintai _kintai, ChromeDriver chrome)
         {
             var img = _tr.FindElement(By.TagName("img"));
@@ -288,7 +261,130 @@ namespace KintaiAuto.Controllers
 
             }
         }
+        #endregion
 
+
+
+        #region　楽楽精算セレクトボックス作成
+        private SelectList rakuPtn()
+        {
+            ChromeDriver chrome = new ChromeDriver();
+
+            try
+            {
+                var wait = new WebDriverWait(chrome, TimeSpan.FromSeconds(60));
+                loginRaku(chrome, wait);
+
+                //交通費精算クリック
+                //var html = chrome.PageSource;
+                var editpage = wait.Until(drv => drv.FindElement(By.LinkText ("交通費精算")));
+                editpage.Click();
+                Thread.Sleep(1 * 1000);
+
+
+                var window = chrome.WindowHandles.Last();  
+                chrome.SwitchTo().Window(window);
+
+                //修正クリック
+                //editpage = wait.Until(drv => drv.FindElement(By.LinkText("修正")));
+                //editpage.Click();
+
+                //window = chrome.WindowHandles.Last();
+                //chrome.SwitchTo().Window(window);
+
+                //マイパターンクリック
+                editpage = wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"meisai-insert-button\"]"))[1]);
+                editpage.Click();
+                Thread.Sleep(1 * 1000);
+
+
+                window = chrome.WindowHandles.Last();
+                chrome.SwitchTo().Window(window);
+
+                Thread.Sleep(1 * 1000);
+
+                //チェックボックスを取得
+                var tr = wait.Until(drv => drv.FindElements(By.ClassName("d_hover")));
+
+                List<RakuPtn> list = new List<RakuPtn>();
+                foreach(var item in tr)
+                {
+                    var ptn = new RakuPtn();
+                    //チェックボックス
+                    var chk = item.FindElement(By.Name("kakutei"));
+                    ptn.Id = chk.GetAttribute("value");
+
+                    //パタン名
+                    var name = item.FindElements(By.TagName("td"))[1];
+                    ptn.PtnName = name.Text;
+
+
+                    list.Add(ptn);
+
+                }
+
+                chromeend(chrome);
+                return new SelectList(list,"Id","PtnName");
+            } catch(SystemException e)
+            {
+                throw e;
+            }
+         }
+        #endregion
+
+        #region ログイン処理
+        private void loginRaku(ChromeDriver chrome, WebDriverWait wait)
+        {
+            //Recolu
+            chrome.Url = rakuurl;
+
+            // 企業IDを入力
+            var kigyoElement = wait.Until(drv => drv.FindElement(By.Name("loginId")));
+            kigyoElement.SendKeys(rakuraku.ID);
+
+            var passElement = wait.Until(drv => drv.FindElement(By.Name("password")));
+            passElement.SendKeys(rakuraku.PASS);
+
+            passElement.SendKeys(Keys.Enter);
+
+            Thread.Sleep(1 * 1000);
+
+            var frame = wait.Until(drv => drv.FindElement(By.Name("main")));
+            chrome.SwitchTo().Frame(frame);
+            Thread.Sleep(1 * 1000);
+        }
+
+        private void loginRecolu(ChromeDriver chrome, WebDriverWait wait)
+        {
+            //Recolu
+            chrome.Url = recourl;
+
+            // 企業IDを入力
+            var kigyoElement = wait.Until(drv => drv.FindElement(By.XPath("//input[@id='contractId']")));
+            kigyoElement.SendKeys(recolu.Kigyo);
+            //kigyoElement.SendKeys(Keys.Enter);
+
+            // メールアドレスを入力
+            var mailElement = wait.Until(drv => drv.FindElement(By.XPath("//input[@id='authId']")));
+            mailElement.SendKeys(recolu.ID);
+            //kigyoElement.SendKeys(Keys.Enter);
+
+            // passを入力
+            var passElement = wait.Until(drv => drv.FindElement(By.XPath("//input[@id='password']")));
+            passElement.SendKeys(recolu.PASS);
+            passElement.SendKeys(Keys.Enter);
+
+            //勤務表へ移動
+            var editpage = wait.Until(drv => drv.FindElement(By.LinkText("勤務表")));
+
+            editpage.Click();
+
+            Thread.Sleep(1 * 1000);
+        }
+        #endregion
+
+
+        #region ログイン情報読み込み
         private List<LoginsInfo> LoginReadText()
         {
             List<LoginsInfo> List = new List<LoginsInfo>();
@@ -314,17 +410,18 @@ namespace KintaiAuto.Controllers
                     if (chk.Contains(RECOLU) && str.Contains("KIGYO"))
                     {
 
-                        str = str.Substring(str.IndexOf("[")+1);
-                        recolu.Kigyo=str.Replace("]", "");
+                        str = str.Substring(str.IndexOf("[") + 1);
+                        recolu.Kigyo = str.Replace("]", "");
                     }
 
                     if (str.Contains("ID"))
                     {
                         if (chk == RECOLU)
                         {
-                            str =  str.Substring(str.IndexOf("[") + 1);
+                            str = str.Substring(str.IndexOf("[") + 1);
                             recolu.ID = str.Replace("]", "");
-;                       }
+                            ;
+                        }
                         else
                         {
                             str = (str.Substring(str.IndexOf("[") + 1));
@@ -354,6 +451,8 @@ namespace KintaiAuto.Controllers
             return List;
 
         }
+        #endregion
+
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

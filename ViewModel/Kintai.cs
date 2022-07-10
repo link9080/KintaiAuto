@@ -19,6 +19,8 @@ namespace KintaiAuto.ViewModel
         public string KyuEndTime { get; set; }
         public string RakuPtn { get; set; }
 
+        public bool? Rakutrue { get; set; }
+
     }
     public class LoginsInfo
     {
@@ -34,5 +36,12 @@ namespace KintaiAuto.ViewModel
     public class KintaiView
     {
         public List<Kintai> Kintais { get; set; }
+    }
+
+    public class RakuPtn
+    {
+        public string Id { get; set; }
+
+        public string PtnName { get; set; }
     }
 }
