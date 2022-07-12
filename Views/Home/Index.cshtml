@@ -49,7 +49,14 @@
                                 @Html.EditorFor(model => model.Kintais[i].KyuEndTime, new { })
                             </td>
                             <td>
-                                @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;" })
+                                @if (Model.Kintais[i].Rakutrue == false)
+                                {
+                                    @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;", disabled = "true" })
+                                }
+                                else
+                                {
+                                    @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;" })
+                                }
                             </td>
                         </tr>
                     }

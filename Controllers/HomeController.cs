@@ -32,6 +32,7 @@ namespace KintaiAuto.Controllers
         const string RAKURAKU = "[RakuRaku]";
         const string  recourl = "https://app.recoru.in/ap/";
         const string rakuurl = "https://rsclef.rakurakuseisan.jp/CSR9KsE9qUa/";
+        List<string> daylist = new List<string>();
         LoginsInfo recolu = new LoginsInfo();
         LoginsInfo rakuraku = new LoginsInfo();
        
@@ -53,9 +54,9 @@ namespace KintaiAuto.Controllers
         {
 
             Debug.WriteLine(model.Kintais.Count());
-            var raku = rakuPtn();
-            ChromeDriver chrome = new ChromeDriver();
             LoginReadText();
+            var raku = rakuPtn(model);
+            ChromeDriver chrome = new ChromeDriver();
 
             try
             {
@@ -80,15 +81,44 @@ namespace KintaiAuto.Controllers
                         var kbn = _tr.FindElement(By.TagName($"select"));
                         var select = new SelectElement(kbn);
                         select.SelectByIndex(1);
-                        var start = _tr.FindElement(By.Id($"chartDto.attendanceDtos[{i}].worktimeStart"));
-                        start.SendKeys(model.Kintais[i].StrTime);
+                        if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]")).Count() > 0)
+                        {
+                            var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]"));
+                            start.SendKeys(model.Kintais[i].StrTime);
+                        }
+                        else if(_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]")).Count() > 0)
+                        {
+                            var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]"));
+                            start.SendKeys(model.Kintais[i].StrTime);
+                        }
+                        else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]")).Count() > 0)
+                        {
+                            var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]"));
+                            start.SendKeys(model.Kintais[i].StrTime);
+                        }
                     }
 
                     //終了
                     if (!string.IsNullOrEmpty(model.Kintais[i].EndTime))
                     {
-                        var end = _tr.FindElement(By.Id($"chartDto.attendanceDtos[{i}].worktimeEnd"));
-                        end.SendKeys(model.Kintais[i].EndTime);
+                        if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText edited\"]")).Count() > 0)
+                        {
+
+                            var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText edited\"]"));
+                            end.SendKeys(model.Kintais[i].EndTime);
+                        }
+                        else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText edited\"]")).Count() > 0)
+                        {
+                            var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText edited\"]"));
+                            end.SendKeys(model.Kintais[i].EndTime);
+
+                        }
+                        else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]")).Count() > 0)
+                        {
+                            var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]"));
+                            end.SendKeys(model.Kintais[i].EndTime);
+
+                        }
                     }
 
                     //休憩
@@ -133,7 +163,7 @@ namespace KintaiAuto.Controllers
             return View();
         }
 
-        private async Task<KintaiView>  Main(DateTime? date = null)
+        private async Task<KintaiView>  Main()
         {
             var model = new KintaiView();
             model.Kintais = new List<Kintai>();
@@ -185,6 +215,10 @@ namespace KintaiAuto.Controllers
                             kintai.endID = end[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeEnd")).GetAttribute("id");
                         }
                         ViewData["Kintais[" + i + "].RakuPtn"] = raku;
+                        if(daylist.Count() > 0 && daylist.Where(r => r.Contains(kintai.Date.ToString("d"))).Count() > 0)
+                        {
+                            kintai.Rakutrue = false;
+                        }
                         model.Kintais.Add(kintai);
                     }
                     else
@@ -265,8 +299,8 @@ namespace KintaiAuto.Controllers
 
 
 
-        #region　楽楽精算セレクトボックス作成
-        private SelectList rakuPtn()
+        #region　楽楽精算セレクトボックス作成更新
+        private SelectList rakuPtn(KintaiView model = null)
         {
             ChromeDriver chrome = new ChromeDriver();
 
@@ -277,7 +311,7 @@ namespace KintaiAuto.Controllers
 
                 //交通費精算クリック
                 //var html = chrome.PageSource;
-                var editpage = wait.Until(drv => drv.FindElement(By.LinkText ("交通費精算")));
+                var editpage = wait.Until(drv => drv.FindElements(By.LinkText ("交通費精算"))[1]);
                 editpage.Click();
                 Thread.Sleep(1 * 1000);
 
@@ -286,11 +320,15 @@ namespace KintaiAuto.Controllers
                 chrome.SwitchTo().Window(window);
 
                 //修正クリック
-                //editpage = wait.Until(drv => drv.FindElement(By.LinkText("修正")));
-                //editpage.Click();
+                editpage = wait.Until(drv => drv.FindElement(By.LinkText("修正")));
+                editpage.Click();
 
-                //window = chrome.WindowHandles.Last();
-                //chrome.SwitchTo().Window(window);
+                window = chrome.WindowHandles.Last();
+                chrome.SwitchTo().Window(window);
+
+                //すでに作成済みの日付を取得
+                var daylists = wait.Until(drv => drv.FindElements(By.ClassName("labelColorDefault")));
+                daylist.AddRange(daylists.Select(r => r.Text));
 
                 //マイパターンクリック
                 editpage = wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"meisai-insert-button\"]"))[1]);
@@ -321,6 +359,76 @@ namespace KintaiAuto.Controllers
 
                     list.Add(ptn);
 
+                }
+                if(model != null)
+                {
+                    for (int i = 0; i < model.Kintais.Count(); i++)
+                    {
+                        if(model.Kintais[i].Rakutrue != false && !(string.IsNullOrEmpty(model.Kintais[i].RakuPtn)))
+                        {
+                            //チェックボックスを取得
+                            var chks = wait.Until(drv => drv.FindElements(By.Name("kakutei")));
+
+                            foreach(var chk in chks)
+                            {
+                                if(chk.GetAttribute("value") == model.Kintais[i].RakuPtn)
+                                {
+                                    chk.Click();
+                                    break;
+                                }
+                            }
+
+                            //次へクリック
+                            var nextbtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"common-btn accesskeyFix kakutei d_marginLeft5\"]")));
+                            nextbtn.Click();
+
+                            Thread.Sleep(1 * 1000);
+
+                            //日付入力meisaiDate
+                            var Dateinput = wait.Until(drv => drv.FindElements(By.Name("meisaiDate"))[1]);
+                            Dateinput.SendKeys(model.Kintais[i].Date.ToString("d"));
+
+                            //明細追加押下
+                            nextbtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"button button--l button-primary accesskeyFix kakutei\"]")));
+                            nextbtn.Click();
+                            Thread.Sleep(1 * 1000);
+
+                            window = chrome.WindowHandles.Last();
+                            chrome.SwitchTo().Window(window);
+
+                            if (i != model.Kintais.Count())
+                            {
+
+                                //マイパターンクリック
+                                editpage = wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"meisai-insert-button\"]"))[1]);
+                                editpage.Click();
+                                Thread.Sleep(1 * 1000);
+
+
+                                window = chrome.WindowHandles.Last();
+                                chrome.SwitchTo().Window(window);
+                            }
+
+
+                        }
+
+                    }
+                    //最後追加から入力がないパターンの考慮
+                    if (wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"common-btn accesskeyClose\"]"))).Count() > 0) 
+                    {
+                        var closebtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"common-btn accesskeyClose\"]")));
+                        closebtn.Click();
+
+                        window = chrome.WindowHandles.Last();
+                        chrome.SwitchTo().Window(window);
+                    }
+
+                    //一次保存押下
+                    if (wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"button save accesskeyReturn\"]"))).Count() > 0)
+                    {
+                        var savebtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"button save accesskeyReturn\"]")));
+                        savebtn.Click();
+                    }
                 }
 
                 chromeend(chrome);
