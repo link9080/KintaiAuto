@@ -56,7 +56,9 @@ namespace KintaiAuto.Controllers
             Debug.WriteLine(model.Kintais.Count());
             LoginReadText();
             var raku = rakuPtn(model);
-            ChromeDriver chrome = new ChromeDriver();
+            var option = new ChromeOptions();
+            //option.AddArgument("headless");
+            ChromeDriver chrome = new ChromeDriver(option);
 
             try
             {
@@ -89,6 +91,11 @@ namespace KintaiAuto.Controllers
                         else if(_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]")).Count() > 0)
                         {
                             var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]"));
+                            start.SendKeys(model.Kintais[i].StrTime);
+                        }
+                        else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText\"]")).Count() > 0)
+                        {
+                            var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText\"]"));
                             start.SendKeys(model.Kintais[i].StrTime);
                         }
                         else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]")).Count() > 0)
@@ -145,7 +152,7 @@ namespace KintaiAuto.Controllers
             {
                 throw e;
             }
-
+            ViewData["Message"] = "登録完了";
             return View("Index",model);
         }
         #endregion
@@ -168,7 +175,9 @@ namespace KintaiAuto.Controllers
             var model = new KintaiView();
             model.Kintais = new List<Kintai>();
             var raku = rakuPtn();
-            ChromeDriver chrome = new ChromeDriver();
+            var option = new ChromeOptions();
+            //option.AddArgument("headless");
+            ChromeDriver chrome = new ChromeDriver(option);
 
             try
             {
@@ -302,7 +311,9 @@ namespace KintaiAuto.Controllers
         #region　楽楽精算セレクトボックス作成更新
         private SelectList rakuPtn(KintaiView model = null)
         {
-            ChromeDriver chrome = new ChromeDriver();
+            var option = new ChromeOptions();
+            option.AddArgument("headless");
+            ChromeDriver chrome = new ChromeDriver(option);
 
             try
             {

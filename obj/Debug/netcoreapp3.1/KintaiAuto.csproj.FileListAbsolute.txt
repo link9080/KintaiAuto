@@ -36,7 +36,6 @@ D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\AngleSharp.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
-D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.csproj.AssemblyReference.cache
 D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.GeneratedMSBuildEditorConfig.editorconfig
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\AngleSharp.Js.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\jint.dll
