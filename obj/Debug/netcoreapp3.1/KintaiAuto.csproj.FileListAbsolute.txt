@@ -42,3 +42,4 @@ D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\jint.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\WebDriver.Support.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\WebDriver.dll
+D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.csproj.AssemblyReference.cache

@@ -120,6 +120,12 @@ namespace KintaiAuto.Controllers
                             end.SendKeys(model.Kintais[i].EndTime);
 
                         }
+                        else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText\"]")).Count() > 0)
+                        {
+                            var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText\"]"));
+                            end.SendKeys(model.Kintais[i].EndTime);
+
+                        }
                         else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]")).Count() > 0)
                         {
                             var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]"));
