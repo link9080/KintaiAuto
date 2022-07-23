@@ -82,7 +82,12 @@ namespace KintaiAuto.Controllers
                         //勤務区分 オンサイト固定
                         var kbn = _tr.FindElement(By.TagName($"select"));
                         var select = new SelectElement(kbn);
-                        select.SelectByIndex(1);
+                        var opt = select.SelectedOption.GetAttribute("value");
+                        if (string.IsNullOrEmpty(opt))
+                        {
+                            select.SelectByIndex(1);
+                        }
+
                         if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]")).Count() > 0)
                         {
                             var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]"));

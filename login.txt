@@ -1,8 +1,8 @@
 [Recolu]
 KIGYO[170096]
-ID[oyama.shota@alhinc.jp]
-PASS[alhLink2]
+ID[]
+PASS[]
 
 [RakuRaku]
-ID[2021087]
-PASS[alhLink2]
+ID[]
+PASS[]
