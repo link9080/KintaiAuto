@@ -70,79 +70,80 @@ namespace KintaiAuto.Controllers
 
                 loginRecolu(chrome, wait);
 
-
-                for (int i = 0;i <  model.Kintais.Count();i++)
+                for (int i = 0; i < model.Kintais.Count(); i++)
                 {
-                    
-                    var _tr = wait.Until(drv => drv.FindElement(By.CssSelector($"[class='{TR_CLASS + model.Kintais[i].Date.ToString("yyyyMMdd")}']")));
-
-                    //開始
-                    if (!string.IsNullOrEmpty(model.Kintais[i].StrTime))
+                    if ((model.Kintais.Where(r => r.inputflg).Count() == 0) || (model.Kintais.Where(r => r.inputflg).Count() != 0 && model.Kintais[i].inputflg))
                     {
-                        //勤務区分 オンサイト固定
-                        var kbn = _tr.FindElement(By.TagName($"select"));
-                        var select = new SelectElement(kbn);
-                        var opt = select.SelectedOption.GetAttribute("value");
-                        if (string.IsNullOrEmpty(opt))
+                        var _tr = wait.Until(drv => drv.FindElement(By.CssSelector($"[class='{TR_CLASS + model.Kintais[i].Date.ToString("yyyyMMdd")}']")));
+
+                        //開始
+                        if (!string.IsNullOrEmpty(model.Kintais[i].StrTime))
                         {
-                            select.SelectByIndex(1);
+                            //勤務区分 オンサイト固定
+                            var kbn = _tr.FindElement(By.TagName($"select"));
+                            var select = new SelectElement(kbn);
+                            var opt = select.SelectedOption.GetAttribute("value");
+                            if (string.IsNullOrEmpty(opt))
+                            {
+                                select.SelectByIndex(1);
+                            }
+
+                            if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]")).Count() > 0)
+                            {
+                                var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]"));
+                                start.SendKeys(model.Kintais[i].StrTime);
+                            }
+                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]")).Count() > 0)
+                            {
+                                var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]"));
+                                start.SendKeys(model.Kintais[i].StrTime);
+                            }
+                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText\"]")).Count() > 0)
+                            {
+                                var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText\"]"));
+                                start.SendKeys(model.Kintais[i].StrTime);
+                            }
+                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]")).Count() > 0)
+                            {
+                                var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]"));
+                                start.SendKeys(model.Kintais[i].StrTime);
+                            }
                         }
 
-                        if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]")).Count() > 0)
+                        //終了
+                        if (!string.IsNullOrEmpty(model.Kintais[i].EndTime))
                         {
-                            var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]"));
-                            start.SendKeys(model.Kintais[i].StrTime);
-                        }
-                        else if(_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]")).Count() > 0)
-                        {
-                            var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]"));
-                            start.SendKeys(model.Kintais[i].StrTime);
-                        }
-                        else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText\"]")).Count() > 0)
-                        {
-                            var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText\"]"));
-                            start.SendKeys(model.Kintais[i].StrTime);
-                        }
-                        else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]")).Count() > 0)
-                        {
-                            var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]"));
-                            start.SendKeys(model.Kintais[i].StrTime);
-                        }
-                    }
+                            if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText edited\"]")).Count() > 0)
+                            {
 
-                    //終了
-                    if (!string.IsNullOrEmpty(model.Kintais[i].EndTime))
-                    {
-                        if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText edited\"]")).Count() > 0)
-                        {
+                                var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText edited\"]"));
+                                end.SendKeys(model.Kintais[i].EndTime);
+                            }
+                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText edited\"]")).Count() > 0)
+                            {
+                                var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText edited\"]"));
+                                end.SendKeys(model.Kintais[i].EndTime);
 
-                            var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText edited\"]"));
-                            end.SendKeys(model.Kintais[i].EndTime);
+                            }
+                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText\"]")).Count() > 0)
+                            {
+                                var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText\"]"));
+                                end.SendKeys(model.Kintais[i].EndTime);
+
+                            }
+                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]")).Count() > 0)
+                            {
+                                var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]"));
+                                end.SendKeys(model.Kintais[i].EndTime);
+
+                            }
                         }
-                        else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText edited\"]")).Count() > 0)
+
+                        //休憩
+                        if (!string.IsNullOrEmpty(model.Kintais[i].KyuStrTime) && !string.IsNullOrEmpty(model.Kintais[i].KyuEndTime))
                         {
-                            var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText edited\"]"));
-                            end.SendKeys(model.Kintais[i].EndTime);
-
+                            breakTimewrite(_tr, model.Kintais[i], chrome);
                         }
-                        else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText\"]")).Count() > 0)
-                        {
-                            var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText\"]"));
-                            end.SendKeys(model.Kintais[i].EndTime);
-
-                        }
-                        else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]")).Count() > 0)
-                        {
-                            var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]"));
-                            end.SendKeys(model.Kintais[i].EndTime);
-
-                        }
-                    }
-
-                    //休憩
-                    if (!string.IsNullOrEmpty(model.Kintais[i].KyuStrTime) && !string.IsNullOrEmpty(model.Kintais[i].KyuEndTime))
-                    {
-                        breakTimewrite(_tr, model.Kintais[i], chrome);
                     }
 
                     ViewData["Kintais[" + i + "].RakuPtn"] = raku;
@@ -323,7 +324,7 @@ namespace KintaiAuto.Controllers
         private SelectList rakuPtn(KintaiView model = null)
         {
             var option = new ChromeOptions();
-            option.AddArgument("headless");
+            //option.AddArgument("headless");
             ChromeDriver chrome = new ChromeDriver(option);
 
             try

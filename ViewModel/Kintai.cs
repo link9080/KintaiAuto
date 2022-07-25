@@ -7,6 +7,7 @@ namespace KintaiAuto.ViewModel
 {
     public class Kintai
     {
+        public bool inputflg { get; set; }
         public DateTime Date { get; set; }
 
         public string StrTime { get; set; }
