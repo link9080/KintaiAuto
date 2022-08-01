@@ -187,9 +187,14 @@ namespace KintaiAuto.Controllers
             var model = new KintaiView();
             model.Kintais = new List<Kintai>();
             var raku = rakuPtn();
+            if(raku == null)
+            {
+                ViewData["ErrorMessage"] = "楽楽精算のページで今月の交通費精算を作成してください。";
+                return model;
+            }
             var option = new ChromeOptions();
             //option.AddArgument("headless");
-            ChromeDriver chrome = new ChromeDriver(option);
+            ChromeDriver chrome = new ChromeDriver(@"wwwroot/driver/",option);
 
             try
             {
@@ -198,7 +203,6 @@ namespace KintaiAuto.Controllers
                 //tr固定クラス
                 const string TR_CLASS = "1717-";
                 loginRecolu(chrome, wait);
-
 
                 //ログイン後システム日の表が表示される日付を取得
                 var Days = wait.Until(drv => drv.FindElements(By.ClassName("item-day")));
@@ -325,7 +329,7 @@ namespace KintaiAuto.Controllers
         {
             var option = new ChromeOptions();
             //option.AddArgument("headless");
-            ChromeDriver chrome = new ChromeDriver(option);
+            ChromeDriver chrome = new ChromeDriver(@"wwwroot/driver/", option);
 
             try
             {
@@ -334,6 +338,14 @@ namespace KintaiAuto.Controllers
 
                 //交通費精算クリック
                 //var html = chrome.PageSource;
+                if (chrome.FindElements(By.LinkText("交通費精算")).Count() == 1)
+                {
+                    //交通費精算作られていない場合
+                    chromeend(chrome);
+                    return null;
+
+                }
+
                 var editpage = wait.Until(drv => drv.FindElements(By.LinkText ("交通費精算"))[1]);
                 editpage.Click();
                 Thread.Sleep(1 * 1000);
@@ -342,9 +354,18 @@ namespace KintaiAuto.Controllers
                 var window = chrome.WindowHandles.Last();  
                 chrome.SwitchTo().Window(window);
 
-                //修正クリック
-                editpage = wait.Until(drv => drv.FindElement(By.LinkText("修正")));
-                editpage.Click();
+                //修正クリックw_denpyo_l
+                if (chrome.FindElements(By.LinkText("修正")).Count() > 0)
+                {
+                    editpage = wait.Until(drv => drv.FindElement(By.LinkText("修正")));
+                    editpage.Click();
+
+                }
+                else 
+                {
+                    editpage = wait.Until(drv => drv.FindElement(By.ClassName("w_denpyo_l")));
+                    editpage.Click();
+                }
 
                 window = chrome.WindowHandles.Last();
                 chrome.SwitchTo().Window(window);
@@ -482,7 +503,6 @@ namespace KintaiAuto.Controllers
 
             var frame = wait.Until(drv => drv.FindElement(By.Name("main")));
             chrome.SwitchTo().Frame(frame);
-            Thread.Sleep(1 * 1000);
         }
 
         private void loginRecolu(ChromeDriver chrome, WebDriverWait wait)
