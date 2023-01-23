@@ -58,7 +58,7 @@ namespace KintaiAuto.Controllers
             var raku = rakuPtn(model);
             var option = new ChromeOptions();
             //option.AddArgument("headless");
-            ChromeDriver chrome = new ChromeDriver(option);
+            ChromeDriver chrome = new ChromeDriver(@"wwwroot/driver/", option);
 
             try
             {
@@ -223,7 +223,7 @@ namespace KintaiAuto.Controllers
                         var _tr = wait.Until(drv => drv.FindElement(By.CssSelector($"[class='{TR_CLASS + kintai.Date.ToString("yyyyMMdd")}']")));
 
                         //休憩開始終了をセット
-                        breakTimeRead(_tr, kintai,chrome);
+                        //breakTimeRead(_tr, kintai,chrome);
 
                         Debug.WriteLine(start[i].GetAttribute("id"));
                         Debug.WriteLine(start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i-1}].worktimeStart")).GetAttribute("id"));

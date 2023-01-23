@@ -54,7 +54,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.CheckBoxFor(model => model.Kintais[i].inputflg)
+                                    @Html.CheckBoxFor(model => model.Kintais[i].inputflg, new { @class = "chk" })
                                 </td>
                                 <td>
                                     @(Model.Kintais[i].Date.ToString("d"))
@@ -62,7 +62,7 @@
                                     @Html.HiddenFor(model => model.Kintais[i].Rakutrue)
                                 </td>
                                 <td>
-                                    @Html.EditorFor(model => model.Kintais[i].StrTime, new { })
+                                    @Html.EditorFor(model => model.Kintais[i].StrTime,"",new { htmlAttributes =   new { @class = "str"} })
                                     @Html.HiddenFor(model => model.Kintais[i].strID, new { })
                                 </td>
                                 <td>
@@ -96,3 +96,24 @@
         }
     </div>
 </div>
+@section scripts
+    {
+    <script>
+        (function ($) {
+
+            $(".str").on("change", function () {
+                var tr = $(this).closest("tr");
+                var chk = $(tr).find(".chk");
+
+                if (!$(chk).prop("checked")) {
+                    $(chk).click();
+                } else {
+                    if ($(this).val() == "") {
+                        $(chk).click();
+                    }
+                }
+            })
+            
+        })(jQuery);
+    </script>
+    }
