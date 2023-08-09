@@ -79,13 +79,22 @@ namespace KintaiAuto.Controllers
                         //開始
                         if (!string.IsNullOrEmpty(model.Kintais[i].StrTime))
                         {
-                            //勤務区分 オンサイト固定
+                            //勤務区分 
                             var kbn = _tr.FindElement(By.TagName($"select"));
                             var select = new SelectElement(kbn);
                             var opt = select.SelectedOption.GetAttribute("value");
                             if (string.IsNullOrEmpty(opt))
                             {
-                                select.SelectByIndex(1);
+                                //楽楽在宅選択の場合は2つ目オフサイトを選択
+                                if (raku.Where(r => r.Text == "在宅").First().Value == model.Kintais[i].RakuPtn)
+                                {
+                                    select.SelectByIndex(2);
+                                }
+                                else
+                                {
+                                    select.SelectByIndex(1);
+                                }
+                                
                             }
 
                             if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]")).Count() > 0)
