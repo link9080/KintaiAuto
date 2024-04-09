@@ -47,45 +47,57 @@
                             <th>休憩開始</th>
                             <th>休憩終了</th>
                             <th>パターン</th>
+                            <th>パターン2</th>
                         </tr>
                     </thead>
                     <tbody>
                         @for (var i = 0; i < Model.Kintais.Count(); i++)
                         {
-                            <tr>
-                                <td>
-                                    @Html.CheckBoxFor(model => model.Kintais[i].inputflg, new { @class = "chk" })
-                                </td>
-                                <td>
-                                    @(Model.Kintais[i].Date.ToString("d"))
-                                    @Html.HiddenFor(model => model.Kintais[i].Date)
-                                    @Html.HiddenFor(model => model.Kintais[i].Rakutrue)
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Kintais[i].StrTime,"",new { htmlAttributes =   new { @class = "str"} })
-                                    @Html.HiddenFor(model => model.Kintais[i].strID, new { })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Kintais[i].EndTime, "", new { htmlAttributes = new { @class = "str" } })
-                                    @Html.HiddenFor(model => model.Kintais[i].endID, new { })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Kintais[i].KyuStrTime, new { })
-                                </td>
-                                <td>
-                                    @Html.EditorFor(model => model.Kintais[i].KyuEndTime, new { })
-                                </td>
-                                <td>
-                                    @if (Model.Kintais[i].Rakutrue == false)
-                                    {
-                                        @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;", disabled = "true" })
-                                    }
-                                    else
-                                    {
-                                        @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;" })
-                                    }
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @Html.CheckBoxFor(model => model.Kintais[i].inputflg, new { @class = "chk" })
+                            </td>
+                            <td>
+                                @(Model.Kintais[i].Date.ToString("d"))
+                                @Html.HiddenFor(model => model.Kintais[i].Date)
+                                @Html.HiddenFor(model => model.Kintais[i].Rakutrue)
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Kintais[i].StrTime, "", new { htmlAttributes = new { @class = "str" } })
+                                @Html.HiddenFor(model => model.Kintais[i].strID, new { })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Kintais[i].EndTime, "", new { htmlAttributes = new { @class = "str" } })
+                                @Html.HiddenFor(model => model.Kintais[i].endID, new { })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Kintais[i].KyuStrTime, new { })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.Kintais[i].KyuEndTime, new { })
+                            </td>
+                            <td>
+                                @if (Model.Kintais[i].Rakutrue == false)
+                                {
+                                    @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;", disabled = "true" })
+                                }
+                                else
+                                {
+                                    @Html.DropDownListFor(model => model.Kintais[i].RakuPtn, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;" })
+                                }
+                            </td>
+                            <td>
+                                @if (Model.Kintais[i].Rakutrue == false)
+                                {
+                                    @Html.DropDownListFor(model => model.Kintais[i].RakuPtn2, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;", disabled = "true" })
+                                }
+                                else
+                                {
+                                    @Html.DropDownListFor(model => model.Kintais[i].RakuPtn2, null, "", new { @class = "form-control", @style = "width:160px; padding: 6px 6px;" })
+                                }
+                            </td>
+
+                        </tr>
                         }
                     </tbody>
                 </table>

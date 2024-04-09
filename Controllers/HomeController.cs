@@ -58,7 +58,7 @@ namespace KintaiAuto.Controllers
             var raku = rakuPtn(model);
             var option = new ChromeOptions();
             //option.AddArgument("headless");
-            ChromeDriver chrome = new ChromeDriver(@"wwwroot/driver/", option);
+            ChromeDriver chrome = new ChromeDriver(option);
 
             try
             {
@@ -86,7 +86,8 @@ namespace KintaiAuto.Controllers
                             if (string.IsNullOrEmpty(opt))
                             {
                                 //楽楽在宅選択の場合は2つ目オフサイトを選択
-                                if (raku.Where(r => r.Text == "在宅").First().Value == model.Kintais[i].RakuPtn)
+                                if (raku.Where(r => r.Text == "在宅").First().Value == model.Kintais[i].RakuPtn ||
+                                    raku.Where(r => r.Text == "在宅").First().Value == model.Kintais[i].RakuPtn2)
                                 {
                                     select.SelectByIndex(2);
                                 }
@@ -164,6 +165,7 @@ namespace KintaiAuto.Controllers
                     }
 
                     ViewData["Kintais[" + i + "].RakuPtn"] = raku;
+                    ViewData["Kintais[" + i + "].RakuPtn2"] = raku;
 
                 }
                 //更新押下
@@ -211,7 +213,7 @@ namespace KintaiAuto.Controllers
             }
             var option = new ChromeOptions();
             //option.AddArgument("headless");
-            ChromeDriver chrome = new ChromeDriver(@"wwwroot/driver/",option);
+            ChromeDriver chrome = new ChromeDriver(option);
 
             try
             {
@@ -257,7 +259,8 @@ namespace KintaiAuto.Controllers
                             kintai.endID = end[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeEnd")).GetAttribute("id");
                         }
                         ViewData["Kintais[" + i + "].RakuPtn"] = raku;
-                        if(daylist.Count() > 0 && daylist.Where(r => r.Contains(kintai.Date.ToString("d"))).Count() > 0)
+                        ViewData["Kintais[" + i + "].RakuPtn2"] = raku;
+                        if (daylist.Count() > 0 && daylist.Where(r => r.Contains(kintai.Date.ToString("d"))).Count() > 0)
                         {
                             kintai.Rakutrue = false;
                         }
@@ -266,6 +269,7 @@ namespace KintaiAuto.Controllers
                     else
                     {
                         ViewData["Kintais[" + i + "].RakuPtn"] = raku;
+                        ViewData["Kintais[" + i + "].RakuPtn2"] = raku;
                         continue;
                     }
                     
@@ -346,7 +350,7 @@ namespace KintaiAuto.Controllers
         {
             var option = new ChromeOptions();
             //option.AddArgument("headless");
-            ChromeDriver chrome = new ChromeDriver(@"wwwroot/driver/", option);
+            ChromeDriver chrome = new ChromeDriver(option);
 
             try
             {
@@ -433,6 +437,53 @@ namespace KintaiAuto.Controllers
                             foreach(var chk in chks)
                             {
                                 if(chk.GetAttribute("value") == model.Kintais[i].RakuPtn)
+                                {
+                                    chk.Click();
+                                    break;
+                                }
+                            }
+
+                            //次へクリック
+                            var nextbtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"common-btn accesskeyFix kakutei d_marginLeft5\"]")));
+                            nextbtn.Click();
+
+                            Thread.Sleep(1 * 1000);
+
+                            //日付入力meisaiDate
+                            var Dateinput = wait.Until(drv => drv.FindElements(By.Name("meisaiDate"))[1]);
+                            Dateinput.SendKeys(model.Kintais[i].Date.ToString("d"));
+
+                            //明細追加押下
+                            nextbtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"button button--l button-primary accesskeyFix kakutei\"]")));
+                            nextbtn.Click();
+                            Thread.Sleep(1 * 1000);
+
+                            window = chrome.WindowHandles.Last();
+                            chrome.SwitchTo().Window(window);
+
+                            if (i != model.Kintais.Count())
+                            {
+
+                                //マイパターンクリック
+                                editpage = wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"meisai-insert-button\"]"))[1]);
+                                editpage.Click();
+                                Thread.Sleep(1 * 1000);
+
+
+                                window = chrome.WindowHandles.Last();
+                                chrome.SwitchTo().Window(window);
+                            }
+
+
+                        }
+                        if (model.Kintais[i].Rakutrue != false && !(string.IsNullOrEmpty(model.Kintais[i].RakuPtn2)))
+                        {
+                            //チェックボックスを取得
+                            var chks = wait.Until(drv => drv.FindElements(By.Name("kakutei")));
+
+                            foreach (var chk in chks)
+                            {
+                                if (chk.GetAttribute("value") == model.Kintais[i].RakuPtn2)
                                 {
                                     chk.Click();
                                     break;

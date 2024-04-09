@@ -19,6 +19,7 @@ namespace KintaiAuto.ViewModel
         public string KyuStrTime { get; set; }
         public string KyuEndTime { get; set; }
         public string RakuPtn { get; set; }
+        public string RakuPtn2 { get; set; }
 
         public bool? Rakutrue { get; set; }
 
