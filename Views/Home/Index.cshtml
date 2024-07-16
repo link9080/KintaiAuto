@@ -45,7 +45,6 @@
                             <th>開始</th>
                             <th>終了</th>
                             <th>休憩開始</th>
-                            <th>休憩終了</th>
                             <th>パターン</th>
                             <th>パターン2</th>
                         </tr>
@@ -72,9 +71,6 @@
                             </td>
                             <td>
                                 @Html.EditorFor(model => model.Kintais[i].KyuStrTime, new { })
-                            </td>
-                            <td>
-                                @Html.EditorFor(model => model.Kintais[i].KyuEndTime, new { })
                             </td>
                             <td>
                                 @if (Model.Kintais[i].Rakutrue == false)

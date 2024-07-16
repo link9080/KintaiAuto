@@ -158,7 +158,7 @@ namespace KintaiAuto.Controllers
                         }
 
                         //休憩
-                        if (!string.IsNullOrEmpty(model.Kintais[i].KyuStrTime) && !string.IsNullOrEmpty(model.Kintais[i].KyuEndTime))
+                        if (!string.IsNullOrEmpty(model.Kintais[i].KyuStrTime))
                         {
                             breakTimewrite(_tr, model.Kintais[i], chrome);
                         }
@@ -181,7 +181,9 @@ namespace KintaiAuto.Controllers
             }
             catch (System.Exception e)
             {
-                throw e;
+                chromeend(chrome);
+                ViewData["ErrorMessage"] = e.Message;
+                return View("Index",model);
             }
             ViewData["Message"] = "登録完了";
             return View("Index",model);
@@ -318,10 +320,14 @@ namespace KintaiAuto.Controllers
             Thread.Sleep(1 * 1000);
 
             var kyustr = chrome.FindElement(By.Id("breaktimeDtos[0].breaktimeStart"));
+            kyustr.Clear();
             kyustr.SendKeys(_kintai.KyuStrTime);
 
             var kyuend = chrome.FindElement(By.Id("breaktimeDtos[0].breaktimeEnd"));
-            kyuend.SendKeys(_kintai.KyuEndTime);
+            kyuend.Clear();
+            //休憩終了時間,勤務時間により計算するように
+            var kyuEndCalc = DateTimeUtil.CalcKyukei(_kintai);
+            kyuend.SendKeys(kyuEndCalc);
 
             //chrome.ExecuteScript("updateBreaktimeEditDialog();");
             var btn = chrome.FindElements(By.Id("UPDATE-BTN"))[1];
@@ -429,7 +435,7 @@ namespace KintaiAuto.Controllers
                 {
                     for (int i = 0; i < model.Kintais.Count(); i++)
                     {
-                        if(model.Kintais[i].Rakutrue != false && !(string.IsNullOrEmpty(model.Kintais[i].RakuPtn)))
+                        if(model.Kintais[i].Rakutrue != false && !(string.IsNullOrEmpty(model.Kintais[i].RakuPtn)) && !(daylist.Where(r => r.StartsWith(model.Kintais[i].Date.ToString("d"))).Any()))
                         {
                             //チェックボックスを取得
                             var chks = wait.Until(drv => drv.FindElements(By.Name("kakutei")));
@@ -476,7 +482,7 @@ namespace KintaiAuto.Controllers
 
 
                         }
-                        if (model.Kintais[i].Rakutrue != false && !(string.IsNullOrEmpty(model.Kintais[i].RakuPtn2)))
+                        if (model.Kintais[i].Rakutrue != false && !(string.IsNullOrEmpty(model.Kintais[i].RakuPtn2)) && !(daylist.Where(r => r.StartsWith(model.Kintais[i].Date.ToString("d"))).Any()))
                         {
                             //チェックボックスを取得
                             var chks = wait.Until(drv => drv.FindElements(By.Name("kakutei")));
