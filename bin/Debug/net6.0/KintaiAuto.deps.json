@@ -10,9 +10,9 @@
         "dependencies": {
           "AngleSharp": "1.1.2",
           "AngleSharp.Js": "0.15.0",
-          "Selenium.Support": "4.19.0",
-          "Selenium.WebDriver": "4.19.0",
-          "Selenium.WebDriver.ChromeDriver": "123.0.6312.8600"
+          "Selenium.Support": "4.23.0",
+          "Selenium.WebDriver": "4.23.0",
+          "Selenium.WebDriver.ChromeDriver": "126.0.6478.18200"
         },
         "runtime": {
           "KintaiAuto.dll": {}
@@ -144,9 +144,9 @@
           "Microsoft.NETCore.Targets": "1.0.1"
         }
       },
-      "Selenium.Support/4.19.0": {
+      "Selenium.Support/4.23.0": {
         "dependencies": {
-          "Selenium.WebDriver": "4.19.0"
+          "Selenium.WebDriver": "4.23.0"
         },
         "runtime": {
           "lib/netstandard2.0/WebDriver.Support.dll": {
@@ -155,7 +155,7 @@
           }
         }
       },
-      "Selenium.WebDriver/4.19.0": {
+      "Selenium.WebDriver/4.23.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.1"
         },
@@ -166,7 +166,7 @@
           }
         }
       },
-      "Selenium.WebDriver.ChromeDriver/123.0.6312.8600": {},
+      "Selenium.WebDriver.ChromeDriver/126.0.6478.18200": {},
       "System.AppContext/4.1.0": {
         "dependencies": {
           "System.Runtime": "4.1.0"
@@ -853,26 +853,26 @@
       "path": "runtime.native.system.security.cryptography/4.0.0",
       "hashPath": "runtime.native.system.security.cryptography.4.0.0.nupkg.sha512"
     },
-    "Selenium.Support/4.19.0": {
+    "Selenium.Support/4.23.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-mMghl/3vzRNbE1FA57Iqpw8206DCKekvXl+6PKi811/fg98HSomrknvHgI4aZbfJEuL7Y2IKFt1oBbbUQT0elQ==",
-      "path": "selenium.support/4.19.0",
-      "hashPath": "selenium.support.4.19.0.nupkg.sha512"
+      "sha512": "sha512-ykT3saViorD54A6Eizw6CnNp8SuuIx4E01QhtEnZVrFvgH6P6mSgpCgfDlCX2RNwbGnrpkeoG5eV1dOGmzP12w==",
+      "path": "selenium.support/4.23.0",
+      "hashPath": "selenium.support.4.23.0.nupkg.sha512"
     },
-    "Selenium.WebDriver/4.19.0": {
+    "Selenium.WebDriver/4.23.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-rguRY+Kbiow0s7RHtnHXnJdMgsmqAOOtv7ZGBtIQ1DbErkFtksrZHdUMcKyMK6VKNMmfsViqcCDGw4mPSPT70w==",
-      "path": "selenium.webdriver/4.19.0",
-      "hashPath": "selenium.webdriver.4.19.0.nupkg.sha512"
+      "sha512": "sha512-jQxNGGuWeSw/+xeZVv+0TL6pVnKeLsBYlxvADY7iGyq1yjgtUFNxGK01t0Op6+FMVdFLcMysL4Z0VdTvzFn0eA==",
+      "path": "selenium.webdriver/4.23.0",
+      "hashPath": "selenium.webdriver.4.23.0.nupkg.sha512"
     },
-    "Selenium.WebDriver.ChromeDriver/123.0.6312.8600": {
+    "Selenium.WebDriver.ChromeDriver/126.0.6478.18200": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1OnN2EepEdRxCKkVJHZFaLoCNWpwELO1un2RzDcpRsjulemXiBV9xv4Fz0ylKQtTRGeKapTSAK5E1eZL+draQw==",
-      "path": "selenium.webdriver.chromedriver/123.0.6312.8600",
-      "hashPath": "selenium.webdriver.chromedriver.123.0.6312.8600.nupkg.sha512"
+      "sha512": "sha512-BIp1ykkondFhOpujffGRthlIcVCrBtQLSu/ZxxjDmrYYBcZu6WHtwhsJ6JhP/awys1AWk/BBV4wNbh1ID7Sq6Q==",
+      "path": "selenium.webdriver.chromedriver/126.0.6478.18200",
+      "hashPath": "selenium.webdriver.chromedriver.126.0.6478.18200.nupkg.sha512"
     },
     "System.AppContext/4.1.0": {
       "type": "package",

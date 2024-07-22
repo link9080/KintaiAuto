@@ -1,0 +1,8 @@
+D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\appsettings.Development.json
+D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\appsettings.json
+D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\KintaiAuto.pdb
+D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\selenium-manager\linux\selenium-manager
+D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\selenium-manager\macos\selenium-manager
+D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\selenium-manager\windows\selenium-manager.exe
+D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\aspnetcorev2_inprocess.dll
+D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\KintaiAuto.exe

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SjCAYIjV7qhaHagaLK2446acCo7NV5ZIZDtuvlaInvXqv0E70XfUQDfYKNI9yJY8EKZPN8YBbxSDez9G17av/A==",
+  "dgSpecHash": "BG91hoVn0Xy0Vj1b/CtrBTHl0hy+o1XsQKKOGpzdnhDXlEV1mvevq5qYogCFFbdDNTK0VT2fb57uBG7Ya1BFzw==",
   "success": true,
   "projectFilePath": "D:\\work\\Kintai_Auto\\KintaiAuto\\KintaiAuto.csproj",
   "expectedPackageFiles": [
@@ -16,9 +16,9 @@
     "C:\\Users\\oldme\\.nuget\\packages\\runtime.native.system.io.compression\\4.1.0\\runtime.native.system.io.compression.4.1.0.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\runtime.native.system.net.http\\4.0.1\\runtime.native.system.net.http.4.0.1.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\runtime.native.system.security.cryptography\\4.0.0\\runtime.native.system.security.cryptography.4.0.0.nupkg.sha512",
-    "C:\\Users\\oldme\\.nuget\\packages\\selenium.support\\4.19.0\\selenium.support.4.19.0.nupkg.sha512",
-    "C:\\Users\\oldme\\.nuget\\packages\\selenium.webdriver\\4.19.0\\selenium.webdriver.4.19.0.nupkg.sha512",
-    "C:\\Users\\oldme\\.nuget\\packages\\selenium.webdriver.chromedriver\\123.0.6312.8600\\selenium.webdriver.chromedriver.123.0.6312.8600.nupkg.sha512",
+    "C:\\Users\\oldme\\.nuget\\packages\\selenium.support\\4.23.0\\selenium.support.4.23.0.nupkg.sha512",
+    "C:\\Users\\oldme\\.nuget\\packages\\selenium.webdriver\\4.23.0\\selenium.webdriver.4.23.0.nupkg.sha512",
+    "C:\\Users\\oldme\\.nuget\\packages\\selenium.webdriver.chromedriver\\126.0.6478.18200\\selenium.webdriver.chromedriver.126.0.6478.18200.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\system.appcontext\\4.1.0\\system.appcontext.4.1.0.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\system.buffers\\4.0.0\\system.buffers.4.0.0.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\system.collections\\4.0.11\\system.collections.4.0.11.nupkg.sha512",
