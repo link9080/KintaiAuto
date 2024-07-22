@@ -57,7 +57,10 @@ namespace KintaiAuto.Controllers
             LoginReadText();
             var raku = rakuPtn(model);
             var option = new ChromeOptions();
-            //option.AddArgument("headless");
+            if (OperatingSystem.IsLinux())
+            {
+                option.AddArgument("--headless");
+            }
             ChromeDriver chrome = new ChromeDriver(option);
 
             try
@@ -214,7 +217,10 @@ namespace KintaiAuto.Controllers
                 return model;
             }
             var option = new ChromeOptions();
-            //option.AddArgument("headless");
+            if (OperatingSystem.IsLinux())
+            {
+                option.AddArgument("--headless");
+            }
             ChromeDriver chrome = new ChromeDriver(option);
 
             try
@@ -355,7 +361,10 @@ namespace KintaiAuto.Controllers
         private SelectList rakuPtn(KintaiView model = null)
         {
             var option = new ChromeOptions();
-            //option.AddArgument("headless");
+            if (OperatingSystem.IsLinux())
+            {
+                option.AddArgument("--headless");
+            }
             ChromeDriver chrome = new ChromeDriver(option);
 
             try
