@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyProductAttribute("KintaiAuto")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+58ea225c9d0fd7198e00433076102b5bae811e45")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KintaiAuto.Views")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 

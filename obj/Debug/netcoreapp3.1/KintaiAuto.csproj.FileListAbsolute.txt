@@ -31,7 +31,6 @@ D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.Views.pdb
 D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.dll
 D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.pdb
 D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.genruntimeconfig.cache
-D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.csproj.CopyComplete
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\AngleSharp.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\System.Text.Encoding.CodePages.dll
@@ -45,3 +44,10 @@ D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.csproj.Assembl
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\selenium-manager\linux\selenium-manager
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\selenium-manager\macos\selenium-manager
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\netcoreapp3.1\selenium-manager\windows\selenium-manager.exe
+D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.sourcelink.json
+D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\staticwebassets\KintaiAuto.StaticWebAssets.Pack.cache
+D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.KintaiAuto.Microsoft.AspNetCore.StaticWebAssets.props
+D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.build.KintaiAuto.props
+D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildMultiTargeting.KintaiAuto.props
+D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\staticwebassets\msbuild.buildTransitive.KintaiAuto.props
+D:\work\Kintai_Auto\KintaiAuto\obj\Debug\netcoreapp3.1\KintaiAuto.csproj.Up2Date
