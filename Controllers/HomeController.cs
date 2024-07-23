@@ -621,7 +621,7 @@ namespace KintaiAuto.Controllers
 
             editpage.Click();
 
-            Thread.Sleep(1 * 1000);
+            Thread.Sleep(5 * 1000);
         }
         #endregion
 
