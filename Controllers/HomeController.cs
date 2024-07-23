@@ -220,7 +220,7 @@ namespace KintaiAuto.Controllers
             }
             var option = new ChromeOptions();
 
-                option.AddArgument("--headless");
+            option.AddArgument("--headless");
 
             ChromeDriver chrome = new ChromeDriver(option);
 
@@ -231,9 +231,11 @@ namespace KintaiAuto.Controllers
                 //tr固定クラス
                 const string TR_CLASS = "1717-";
                 loginRecolu(chrome, wait);
+                _logger.Info("recoluログイン成功");
 
                 //ログイン後システム日の表が表示される日付を取得
                 var Days = wait.Until(drv => drv.FindElements(By.ClassName("item-day")));
+                
 
                 //開始
                 var start = wait.Until(drv => drv.FindElements(By.ClassName("item-worktimeStart")));
@@ -247,6 +249,7 @@ namespace KintaiAuto.Controllers
                     if(DateTime.TryParse(Days[i].Text,out _))
                     {
                         kintai.Date = DateTime.Parse(Days[i].Text);
+                        _logger.Info(kintai.Date);
 
                         var _tr = wait.Until(drv => drv.FindElement(By.CssSelector($"[class='{TR_CLASS + kintai.Date.ToString("yyyyMMdd")}']")));
 
@@ -273,6 +276,7 @@ namespace KintaiAuto.Controllers
                         {
                             kintai.Rakutrue = false;
                         }
+
                         model.Kintais.Add(kintai);
                     }
                     else
@@ -284,12 +288,15 @@ namespace KintaiAuto.Controllers
                     
                 }
                 chromeend(chrome);
+                _logger.Info(model.Kintais.Count());
                 return model;
 
             }
-            catch (System.Exception e)
+            catch (Exception e)
             {
-                throw e;
+                _logger.Error(e.StackTrace);
+                ViewData["ErrorMessage"] = e.Message;
+                return model;
             }
 
 
