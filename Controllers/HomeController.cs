@@ -176,11 +176,11 @@ namespace KintaiAuto.Controllers
                 //更新押下
                 var updbtn = wait.Until(drv => drv.FindElement(By.Id($"UPDATE-BTN")));
                 updbtn.Click();
-                Thread.Sleep(1 * 1000);
+                Thread.Sleep(3 * 1000);
 
                 chrome.SwitchTo().Alert().Accept();
 
-                Thread.Sleep(1 * 1000);
+                Thread.Sleep(3 * 1000);
 
                 chromeend(chrome);
             }
