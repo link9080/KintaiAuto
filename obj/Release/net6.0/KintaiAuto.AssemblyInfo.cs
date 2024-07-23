@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("KintaiAuto")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eebe88084f7a437e4d84963ea4daf94ce48915f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ff0603c7eb1fad08ace68f0041c1992c022eb614")]
 [assembly: System.Reflection.AssemblyProductAttribute("KintaiAuto")]
 [assembly: System.Reflection.AssemblyTitleAttribute("KintaiAuto")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

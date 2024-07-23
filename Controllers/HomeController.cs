@@ -27,7 +27,7 @@ namespace KintaiAuto.Controllers
 
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        static NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
         const string RECOLU = "[Recolu]";
         const string RAKURAKU = "[RakuRaku]";
         const string  recourl = "https://app.recoru.in/ap/";
@@ -38,12 +38,13 @@ namespace KintaiAuto.Controllers
        
         public HomeController(ILogger<HomeController> logger)
         {
-            _logger = logger;
         }
 
         public async Task<IActionResult>  Index()
         {
+            _logger.Info("ログイン情報読込");
             LoginReadText();
+            _logger.Info(recolu.ID);
             var model = await Main();
             return View(model);
         }
@@ -185,6 +186,7 @@ namespace KintaiAuto.Controllers
             catch (System.Exception e)
             {
                 chromeend(chrome);
+                _logger.Error(e.StackTrace);
                 ViewData["ErrorMessage"] = e.Message;
                 return View("Index",model);
             }
@@ -217,10 +219,9 @@ namespace KintaiAuto.Controllers
                 return model;
             }
             var option = new ChromeOptions();
-            if (OperatingSystem.IsLinux())
-            {
+
                 option.AddArgument("--headless");
-            }
+
             ChromeDriver chrome = new ChromeDriver(option);
 
             try
@@ -361,17 +362,14 @@ namespace KintaiAuto.Controllers
         private SelectList rakuPtn(KintaiView model = null)
         {
             var option = new ChromeOptions();
-            if (OperatingSystem.IsLinux())
-            {
                 option.AddArgument("--headless");
-            }
             ChromeDriver chrome = new ChromeDriver(option);
 
             try
             {
                 var wait = new WebDriverWait(chrome, TimeSpan.FromSeconds(60));
                 loginRaku(chrome, wait);
-
+                _logger.Info("楽楽清算ログイン成功");
                 //交通費精算クリック
                 //var html = chrome.PageSource;
                 if (chrome.FindElements(By.LinkText("交通費精算")).Count() == 1)
@@ -389,6 +387,7 @@ namespace KintaiAuto.Controllers
 
                 var window = chrome.WindowHandles.Last();  
                 chrome.SwitchTo().Window(window);
+                _logger.Info("楽楽清算-一時保存");
 
                 //修正クリックw_denpyo_l
                 if (chrome.FindElements(By.LinkText("修正")).Count() > 0)
@@ -405,7 +404,7 @@ namespace KintaiAuto.Controllers
 
                 window = chrome.WindowHandles.Last();
                 chrome.SwitchTo().Window(window);
-
+                _logger.Info("楽楽清算-通勤費画面");
                 //すでに作成済みの日付を取得
                 var daylists = wait.Until(drv => drv.FindElements(By.ClassName("labelColorDefault")));
                 daylist.AddRange(daylists.Select(r => r.Text));
@@ -619,9 +618,8 @@ namespace KintaiAuto.Controllers
 
 
         #region ログイン情報読み込み
-        private List<LoginsInfo> LoginReadText()
+        private void LoginReadText()
         {
-            List<LoginsInfo> List = new List<LoginsInfo>();
             string chk = string.Empty;
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             using (StreamReader sr = new StreamReader(@"login.txt", Encoding.GetEncoding("Shift_JIS")))
@@ -679,10 +677,7 @@ namespace KintaiAuto.Controllers
                     }
 
                 }
-                List.Add(recolu);
-                List.Add(rakuraku);
             }
-            return List;
 
         }
         #endregion
