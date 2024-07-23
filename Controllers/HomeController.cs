@@ -21,6 +21,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium;
 using System.Threading;
 using KintaiAuto.Controllers.util;
+using NLog;
 
 namespace KintaiAuto.Controllers
 {
@@ -213,6 +214,7 @@ namespace KintaiAuto.Controllers
             var model = new KintaiView();
             model.Kintais = new List<Kintai>();
             var raku = rakuPtn();
+            _logger.Info(raku.First().Text);
             if(raku == null)
             {
                 ViewData["ErrorMessage"] = "楽楽精算のページで今月の交通費精算を作成してください。";
@@ -235,7 +237,7 @@ namespace KintaiAuto.Controllers
 
                 //ログイン後システム日の表が表示される日付を取得
                 var Days = wait.Until(drv => drv.FindElements(By.ClassName("item-day")));
-                
+                _logger.Info(Days.Count);
 
                 //開始
                 var start = wait.Until(drv => drv.FindElements(By.ClassName("item-worktimeStart")));
