@@ -22,6 +22,7 @@ using OpenQA.Selenium;
 using System.Threading;
 using KintaiAuto.Controllers.util;
 using NLog;
+using System.Security.Claims;
 
 namespace KintaiAuto.Controllers
 {
@@ -468,7 +469,7 @@ namespace KintaiAuto.Controllers
                             nextbtn.Click();
 
 
-                            window = chrome.WindowHandles.Last();
+                            window = wait.Until(drv => drv.WindowHandles.Last());
                             chrome.SwitchTo().Window(window);
 
                             if (i != model.Kintais.Count())
@@ -480,7 +481,7 @@ namespace KintaiAuto.Controllers
 
 
 
-                                window = chrome.WindowHandles.Last();
+                                window = wait.Until(drv => drv.WindowHandles.Last());
                                 chrome.SwitchTo().Window(window);
                             }
 
@@ -515,7 +516,7 @@ namespace KintaiAuto.Controllers
                             nextbtn.Click();
 
 
-                            window = chrome.WindowHandles.Last();
+                            window = wait.Until(drv => drv.WindowHandles.Last());
                             chrome.SwitchTo().Window(window);
 
                             if (i != model.Kintais.Count())
@@ -527,7 +528,7 @@ namespace KintaiAuto.Controllers
 
 
 
-                                window = chrome.WindowHandles.Last();
+                                window = wait.Until(drv => drv.WindowHandles.Last());
                                 chrome.SwitchTo().Window(window);
                             }
 
@@ -541,7 +542,7 @@ namespace KintaiAuto.Controllers
                         var closebtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"common-btn accesskeyClose\"]")));
                         closebtn.Click();
 
-                        window = chrome.WindowHandles.Last();
+                        window = wait.Until(drv => drv.WindowHandles.Last());
                         chrome.SwitchTo().Window(window);
                     }
 
