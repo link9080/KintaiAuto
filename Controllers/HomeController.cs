@@ -360,7 +360,7 @@ namespace KintaiAuto.Controllers
         private SelectList rakuPtn(KintaiView model = null)
         {
             var option = new ChromeOptions();
-            //option.AddArgument("--headless");
+            option.AddArgument("--headless");
             option.ImplicitWaitTimeout = TimeSpan.FromSeconds(30);
             ChromeDriver chrome = new ChromeDriver(option);
 
