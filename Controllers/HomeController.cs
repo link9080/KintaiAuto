@@ -559,7 +559,7 @@ namespace KintaiAuto.Controllers
             }
             catch (SystemException e)
             {
-                _logger.Error(e);
+                _logger.Error(e.StackTrace);
                 throw e;
             }
         }
