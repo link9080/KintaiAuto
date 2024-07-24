@@ -60,7 +60,7 @@ namespace KintaiAuto.Controllers
             var raku = rakuPtn(model);
             var option = new ChromeOptions();
 
-            //option.AddArgument("--headless");
+            option.AddArgument("--headless");
             option.ImplicitWaitTimeout = TimeSpan.FromSeconds(30);
             ChromeDriver chrome = new ChromeDriver(option);
 
