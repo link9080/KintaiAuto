@@ -360,7 +360,7 @@ namespace KintaiAuto.Controllers
         private SelectList rakuPtn(KintaiView model = null)
         {
             var option = new ChromeOptions();
-            option.AddArgument("--headless");
+            //option.AddArgument("--headless");
             option.ImplicitWaitTimeout = TimeSpan.FromSeconds(30);
             ChromeDriver chrome = new ChromeDriver(option);
 
@@ -384,8 +384,8 @@ namespace KintaiAuto.Controllers
 
 
 
-                var window = chrome.WindowHandles.Last();
-                chrome.SwitchTo().Window(window);
+                var window = wait.Until(drv => drv.WindowHandles.Last());
+                wait.Until(drv => drv.SwitchTo().Window(window));
                 _logger.Info("楽楽清算-一時保存");
 
                 //修正クリックw_denpyo_l
@@ -401,8 +401,8 @@ namespace KintaiAuto.Controllers
                     editpage.Click();
                 }
 
-                window = chrome.WindowHandles.Last();
-                chrome.SwitchTo().Window(window);
+                var meisaiWindow = wait.Until(drv => drv.WindowHandles.Last());
+                wait.Until(drv => drv.SwitchTo().Window(meisaiWindow));
                 _logger.Info("楽楽清算-通勤費画面");
                 //すでに作成済みの日付を取得
                 var daylists = wait.Until(drv => drv.FindElements(By.ClassName("labelColorDefault")));
@@ -414,8 +414,8 @@ namespace KintaiAuto.Controllers
 
 
 
-                window = chrome.WindowHandles.Last();
-                chrome.SwitchTo().Window(window);
+                window = wait.Until(drv => drv.WindowHandles.Last());
+                wait.Until(drv => drv.SwitchTo().Window(window));
 
 
                 //チェックボックスを取得
@@ -469,8 +469,8 @@ namespace KintaiAuto.Controllers
                             nextbtn.Click();
 
 
-                            window = wait.Until(drv => drv.WindowHandles.Last());
-                            chrome.SwitchTo().Window(window);
+                            //window = wait.Until(drv => drv.WindowHandles.Last());
+                            wait.Until(drv => drv.SwitchTo().Window(meisaiWindow));
 
                             if (i != model.Kintais.Count())
                             {
@@ -482,7 +482,7 @@ namespace KintaiAuto.Controllers
 
 
                                 window = wait.Until(drv => drv.WindowHandles.Last());
-                                chrome.SwitchTo().Window(window);
+                                wait.Until(drv => drv.SwitchTo().Window(window));
                             }
 
 
@@ -516,8 +516,8 @@ namespace KintaiAuto.Controllers
                             nextbtn.Click();
 
 
-                            window = wait.Until(drv => drv.WindowHandles.Last());
-                            chrome.SwitchTo().Window(window);
+                            //window = wait.Until(drv => drv.WindowHandles.Last());
+                            wait.Until(drv => drv.SwitchTo().Window(meisaiWindow));
 
                             if (i != model.Kintais.Count())
                             {
@@ -529,7 +529,7 @@ namespace KintaiAuto.Controllers
 
 
                                 window = wait.Until(drv => drv.WindowHandles.Last());
-                                chrome.SwitchTo().Window(window);
+                                wait.Until(drv => drv.SwitchTo().Window(window));
                             }
 
 
@@ -543,7 +543,7 @@ namespace KintaiAuto.Controllers
                         closebtn.Click();
 
                         window = wait.Until(drv => drv.WindowHandles.Last());
-                        chrome.SwitchTo().Window(window);
+                        wait.Until(drv => drv.SwitchTo().Window(window));
                     }
 
                     //一次保存押下
