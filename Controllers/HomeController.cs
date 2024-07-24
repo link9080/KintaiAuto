@@ -559,6 +559,7 @@ namespace KintaiAuto.Controllers
             }
             catch (SystemException e)
             {
+                _logger.Error(e);
                 throw e;
             }
         }
