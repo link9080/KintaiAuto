@@ -42,3 +42,4 @@ D:\work\Kintai_Auto\KintaiAuto\bin\Debug\net6.0\nlog.config
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\net6.0\NLog.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\net6.0\NLog.Extensions.Logging.dll
 D:\work\Kintai_Auto\KintaiAuto\bin\Debug\net6.0\NLog.Web.AspNetCore.dll
+D:\work\Kintai_Auto\KintaiAuto\bin\Debug\net6.0\SeleniumExtras.WaitHelpers.dll

@@ -35,6 +35,18 @@
           }
         }
       },
+      "DotNetSeleniumExtras.WaitHelpers/3.11.0": {
+        "type": "package",
+        "dependencies": {
+          "Selenium.WebDriver": "3.10.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/SeleniumExtras.WaitHelpers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/SeleniumExtras.WaitHelpers.dll": {}
+        }
+      },
       "jint/2.10.4": {
         "type": "package",
         "dependencies": {
@@ -1569,6 +1581,21 @@
         "lib/netstandard2.0/AngleSharp.Js.dll",
         "lib/netstandard2.0/AngleSharp.Js.xml",
         "logo.png"
+      ]
+    },
+    "DotNetSeleniumExtras.WaitHelpers/3.11.0": {
+      "sha512": "xc6jVVl5ymgk3ZNWnC/KHxkEup1QpnwYbrwF+NQoCOGERsD8YMlLwmsX4lGhLXCLo/YQTRTIwlKCN9E/doGUNg==",
+      "type": "package",
+      "path": "dotnetseleniumextras.waithelpers/3.11.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "dotnetseleniumextras.waithelpers.3.11.0.nupkg.sha512",
+        "dotnetseleniumextras.waithelpers.nuspec",
+        "lib/net35/SeleniumExtras.WaitHelpers.dll",
+        "lib/net40/SeleniumExtras.WaitHelpers.dll",
+        "lib/net45/SeleniumExtras.WaitHelpers.dll",
+        "lib/netstandard2.0/SeleniumExtras.WaitHelpers.dll"
       ]
     },
     "jint/2.10.4": {
@@ -5203,6 +5230,7 @@
     "net6.0": [
       "AngleSharp >= 1.1.2",
       "AngleSharp.Js >= 0.15.0",
+      "DotNetSeleniumExtras.WaitHelpers >= 3.11.0",
       "NLog.Web.AspNetCore >= 5.3.11",
       "Selenium.Support >= 4.23.0",
       "Selenium.WebDriver >= 4.23.0",
@@ -5260,6 +5288,10 @@
           "AngleSharp.Js": {
             "target": "Package",
             "version": "[0.15.0, )"
+          },
+          "DotNetSeleniumExtras.WaitHelpers": {
+            "target": "Package",
+            "version": "[3.11.0, )"
           },
           "NLog.Web.AspNetCore": {
             "target": "Package",

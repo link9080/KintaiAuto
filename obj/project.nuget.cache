@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "AD3/v2aRjHe8KXEDdnfLRQq8UVtwtrU53brKKv9UY8E8q57ZMw6Zg6a8n/PsZ5eSE8YoWNdiQDhgnzv9FdpMrQ==",
+  "dgSpecHash": "/+POCpFTuxGK96ZZbz9CgdDqHDi2tfk7BYuDwHlGHpHKphk3u6BZxZX1OOoTuqtWlHrjQ41+qvP1myflkJqhmg==",
   "success": true,
   "projectFilePath": "D:\\work\\Kintai_Auto\\KintaiAuto\\KintaiAuto.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\oldme\\.nuget\\packages\\anglesharp\\1.1.2\\anglesharp.1.1.2.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\anglesharp.js\\0.15.0\\anglesharp.js.0.15.0.nupkg.sha512",
+    "C:\\Users\\oldme\\.nuget\\packages\\dotnetseleniumextras.waithelpers\\3.11.0\\dotnetseleniumextras.waithelpers.3.11.0.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\jint\\2.10.4\\jint.2.10.4.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\oldme\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.0\\microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",

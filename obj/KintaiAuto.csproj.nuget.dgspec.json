@@ -53,6 +53,10 @@
               "target": "Package",
               "version": "[0.15.0, )"
             },
+            "DotNetSeleniumExtras.WaitHelpers": {
+              "target": "Package",
+              "version": "[3.11.0, )"
+            },
             "NLog.Web.AspNetCore": {
               "target": "Package",
               "version": "[5.3.11, )"

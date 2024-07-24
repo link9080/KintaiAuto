@@ -10,6 +10,7 @@
         "dependencies": {
           "AngleSharp": "1.1.2",
           "AngleSharp.Js": "0.15.0",
+          "DotNetSeleniumExtras.WaitHelpers": "3.11.0",
           "NLog.Web.AspNetCore": "5.3.11",
           "Selenium.Support": "4.23.0",
           "Selenium.WebDriver": "4.23.0",
@@ -39,6 +40,17 @@
           "lib/netstandard2.0/AngleSharp.Js.dll": {
             "assemblyVersion": "0.15.0.0",
             "fileVersion": "0.15.0.0"
+          }
+        }
+      },
+      "DotNetSeleniumExtras.WaitHelpers/3.11.0": {
+        "dependencies": {
+          "Selenium.WebDriver": "4.23.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/SeleniumExtras.WaitHelpers.dll": {
+            "assemblyVersion": "3.11.0.0",
+            "fileVersion": "3.11.0.0"
           }
         }
       },
@@ -844,6 +856,13 @@
       "sha512": "sha512-m8pgXJz+sCWfjPeTQreOLCLZe+j7TtEgo4UkmlDmxV/i1uLpShcSQVJU8Nxw4E4wOaeIVP1l6kc65U2e+/P0Uw==",
       "path": "anglesharp.js/0.15.0",
       "hashPath": "anglesharp.js.0.15.0.nupkg.sha512"
+    },
+    "DotNetSeleniumExtras.WaitHelpers/3.11.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xc6jVVl5ymgk3ZNWnC/KHxkEup1QpnwYbrwF+NQoCOGERsD8YMlLwmsX4lGhLXCLo/YQTRTIwlKCN9E/doGUNg==",
+      "path": "dotnetseleniumextras.waithelpers/3.11.0",
+      "hashPath": "dotnetseleniumextras.waithelpers.3.11.0.nupkg.sha512"
     },
     "jint/2.10.4": {
       "type": "package",
