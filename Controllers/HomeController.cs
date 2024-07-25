@@ -56,18 +56,14 @@ namespace KintaiAuto.Controllers
         public async Task<IActionResult> Update([Bind()] KintaiView model)
         {
 
-            Debug.WriteLine(model.Kintais.Count());
+            _logger.Info(model.Kintais.Count());
             LoginReadText();
             var raku = rakuPtn(model);
-            var option = new ChromeOptions();
-
-            option.AddArgument("--headless");
-            option.ImplicitWaitTimeout = TimeSpan.FromSeconds(30);
-            ChromeDriver chrome = new ChromeDriver(option);
+            ChromeDriver chrome = ChromeDriverUtil.Driver();
 
             try
             {
-                var wait = new WebDriverWait(chrome, TimeSpan.FromSeconds(60));
+                var wait = ChromeDriverUtil.waitter(chrome);
 
                 //tr固定クラス
                 const string TR_CLASS = "1717-";
@@ -85,7 +81,7 @@ namespace KintaiAuto.Controllers
                         if (!string.IsNullOrEmpty(model.Kintais[i].StrTime))
                         {
                             //勤務区分 
-                            var kbn = wait.Until(e => _tr.FindElement(By.TagName($"select")));
+                            var kbn = _tr.FindElement(By.TagName($"select"));
                             var select = new SelectElement(kbn);
                             var opt = select.SelectedOption.GetAttribute("value");
                             if (string.IsNullOrEmpty(opt))
@@ -103,27 +99,27 @@ namespace KintaiAuto.Controllers
 
                             }
 
-                            if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]")).Count() > 0)
+                            if (wait.Until(drv => drv.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]"))).Count() > 0)
                             {
-                                var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]"));
+                                var start = wait.Until(drv => drv.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText edited\"]")));
                                 start.Clear();
                                 start.SendKeys(model.Kintais[i].StrTime);
                             }
-                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]")).Count() > 0)
+                            else if (wait.Until(drv => drv.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]"))).Count() > 0)
                             {
-                                var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]"));
+                                var start = wait.Until(drv => drv.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText edited\"]")));
                                 start.Clear();
                                 start.SendKeys(model.Kintais[i].StrTime);
                             }
-                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText\"]")).Count() > 0)
+                            else if (wait.Until(drv => drv.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText\"]"))).Count() > 0)
                             {
-                                var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText\"]"));
+                                var start = wait.Until(drv => drv.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeStart timeText\"]")));
                                 start.Clear();
                                 start.SendKeys(model.Kintais[i].StrTime);
                             }
-                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]")).Count() > 0)
+                            else if (wait.Until(drv => drv.FindElements(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]"))).Count() > 0)
                             {
-                                var start = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]"));
+                                var start = wait.Until(drv => drv.FindElement(By.CssSelector($"[class=\"ID-worktimeStart-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeStart timeText\"]") ));
                                 start.Clear();
                                 start.SendKeys(model.Kintais[i].StrTime);
                             }
@@ -132,30 +128,30 @@ namespace KintaiAuto.Controllers
                         //終了
                         if (!string.IsNullOrEmpty(model.Kintais[i].EndTime))
                         {
-                            if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText edited\"]")).Count() > 0)
+                            if (wait.Until(drv => drv.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText edited\"]"))).Count() > 0)
                             {
 
                                 var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText edited\"]"));
                                 end.Clear();
                                 end.SendKeys(model.Kintais[i].EndTime);
                             }
-                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText edited\"]")).Count() > 0)
+                            else if (wait.Until(drv => drv.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText edited\"]"))).Count() > 0)
                             {
-                                var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText edited\"]"));
+                                var end = wait.Until(drv => drv.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText edited\"]")));
                                 end.Clear();
                                 end.SendKeys(model.Kintais[i].EndTime);
 
                             }
-                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText\"]")).Count() > 0)
+                            else if (wait.Until(drv => drv.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText\"]"))).Count() > 0)
                             {
-                                var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText\"]"));
+                                var end = wait.Until(drv => drv.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 bg-err worktimeEnd timeText\"]")));
                                 end.Clear();
                                 end.SendKeys(model.Kintais[i].EndTime);
 
                             }
-                            else if (_tr.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]")).Count() > 0)
+                            else if (wait.Until(drv => drv.FindElements(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]"))).Count() > 0)
                             {
-                                var end = _tr.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]"));
+                                var end = wait.Until(drv => drv.FindElement(By.CssSelector($"[class=\"ID-worktimeEnd-{model.Kintais[i].Date.ToString("yyyyMMdd")}-1 worktimeEnd timeText\"]")));
                                 end.Clear();
                                 end.SendKeys(model.Kintais[i].EndTime);
 
@@ -178,12 +174,14 @@ namespace KintaiAuto.Controllers
                 updbtn.Click();
                 var alert = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
                 alert.Accept();
+                //処理が速すぎるためスリーブ処理追加
+                Thread.Sleep(TimeSpan.FromSeconds(5));
 
-                chromeend(chrome);
+                ChromeDriverUtil.ChromeEnd(chrome);
             }
             catch (System.Exception e)
             {
-                chromeend(chrome);
+                ChromeDriverUtil.ChromeEnd(chrome);
                 _logger.Error(e.StackTrace);
                 ViewData["ErrorMessage"] = e.Message;
                 return View("Index", model);
@@ -217,16 +215,12 @@ namespace KintaiAuto.Controllers
                 ViewData["ErrorMessage"] = "楽楽精算のページで今月の交通費精算を作成してください。";
                 return model;
             }
-            var option = new ChromeOptions();
 
-            option.AddArgument("--headless");
-            option.ImplicitWaitTimeout = TimeSpan.FromSeconds(30);
-
-            ChromeDriver chrome = new ChromeDriver(option);
+            ChromeDriver chrome = ChromeDriverUtil.Driver();
 
             try
             {
-                var wait = new WebDriverWait(chrome, TimeSpan.FromSeconds(60));
+                var wait = ChromeDriverUtil.waitter(chrome);
 
                 //tr固定クラス
                 const string TR_CLASS = "1717-";
@@ -287,7 +281,7 @@ namespace KintaiAuto.Controllers
                     }
 
                 }
-                chromeend(chrome);
+                ChromeDriverUtil.ChromeEnd(chrome);
                 _logger.Info(model.Kintais.Count());
                 return model;
 
@@ -321,7 +315,7 @@ namespace KintaiAuto.Controllers
 
         private void breakTimewrite(IWebElement _tr, Kintai _kintai, ChromeDriver chrome,WebDriverWait wait)
         {
-            var img = wait.Until(drv => _tr.FindElement(By.TagName("img")));
+            var img = _tr.FindElement(By.TagName("img"));
             img.Click();
 
 
@@ -359,14 +353,11 @@ namespace KintaiAuto.Controllers
         #region　楽楽精算セレクトボックス作成更新
         private SelectList rakuPtn(KintaiView model = null)
         {
-            var option = new ChromeOptions();
-            option.AddArgument("--headless");
-            option.ImplicitWaitTimeout = TimeSpan.FromSeconds(30);
-            ChromeDriver chrome = new ChromeDriver(option);
+            ChromeDriver chrome = ChromeDriverUtil.Driver();
 
             try
             {
-                var wait = new WebDriverWait(chrome, TimeSpan.FromSeconds(60));
+                var wait = ChromeDriverUtil.waitter(chrome);
                 loginRaku(chrome, wait);
                 _logger.Info("楽楽清算ログイン成功");
                 //交通費精算クリック
@@ -374,7 +365,7 @@ namespace KintaiAuto.Controllers
                 if (wait.Until(drv => drv.FindElements(By.LinkText("交通費精算"))).Count() == 1)
                 {
                     //交通費精算作られていない場合
-                    chromeend(chrome);
+                    ChromeDriverUtil.ChromeEnd(chrome);
                     return null;
 
                 }
@@ -554,7 +545,7 @@ namespace KintaiAuto.Controllers
                     }
                 }
 
-                chromeend(chrome);
+                ChromeDriverUtil.ChromeEnd(chrome);
                 return new SelectList(list, "Id", "PtnName");
             }
             catch (SystemException e)
@@ -687,10 +678,6 @@ namespace KintaiAuto.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private void chromeend(ChromeDriver chrome)
-        {
-            chrome.Quit();
-            chrome.Dispose();
-        }
+        
     }
 }

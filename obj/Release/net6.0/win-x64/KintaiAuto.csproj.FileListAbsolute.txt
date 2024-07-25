@@ -392,3 +392,8 @@ D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\refint\KintaiAuto.dll
 D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\KintaiAuto.pdb
 D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\KintaiAuto.genruntimeconfig.cache
 D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\ref\KintaiAuto.dll
+D:\work\Kintai_Auto\KintaiAuto\bin\Release\net6.0\win-x64\nlog.config
+D:\work\Kintai_Auto\KintaiAuto\bin\Release\net6.0\win-x64\SeleniumExtras.WaitHelpers.dll
+D:\work\Kintai_Auto\KintaiAuto\bin\Release\net6.0\win-x64\NLog.dll
+D:\work\Kintai_Auto\KintaiAuto\bin\Release\net6.0\win-x64\NLog.Extensions.Logging.dll
+D:\work\Kintai_Auto\KintaiAuto\bin\Release\net6.0\win-x64\NLog.Web.AspNetCore.dll

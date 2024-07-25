@@ -1,3 +1,4 @@
+D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\nlog.config
 D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\appsettings.Development.json
 D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\appsettings.json
 D:\work\Kintai_Auto\KintaiAuto\obj\Release\net6.0\win-x64\PubTmp\Out\KintaiAuto.pdb
