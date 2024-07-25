@@ -21,7 +21,7 @@ namespace KintaiAuto.Controllers.util
         }
         public static WebDriverWait waitter(ChromeDriver driver)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
             return wait;
         }
 
