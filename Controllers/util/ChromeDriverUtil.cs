@@ -15,8 +15,13 @@ namespace KintaiAuto.Controllers.util
             if (OperatingSystem.IsLinux())
             {
                 option.AddArgument("--headless");
+                option.ImplicitWaitTimeout = TimeSpan.FromSeconds(40);
             }
-            option.ImplicitWaitTimeout = TimeSpan.FromSeconds(1);
+            else
+            {
+                option.ImplicitWaitTimeout = TimeSpan.FromSeconds(10);
+            }
+            
             return new ChromeDriver(option);
         }
         public static WebDriverWait waitter(ChromeDriver driver)
