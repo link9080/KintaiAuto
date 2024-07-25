@@ -70,6 +70,7 @@ namespace KintaiAuto.Controllers
 
 
                 loginRecolu(chrome, wait);
+                _logger.Info("recoluログイン情報読込");
 
                 for (int i = 0; i < model.Kintais.Count(); i++)
                 {
@@ -174,8 +175,7 @@ namespace KintaiAuto.Controllers
                 updbtn.Click();
                 var alert = wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.AlertIsPresent());
                 alert.Accept();
-                //処理が速すぎるためスリーブ処理追加
-                Thread.Sleep(TimeSpan.FromSeconds(5));
+                ChromeDriverUtil.sleep();
 
                 ChromeDriverUtil.ChromeEnd(chrome);
             }
@@ -250,15 +250,15 @@ namespace KintaiAuto.Controllers
                         //休憩開始終了をセット
                         //breakTimeRead(_tr, kintai,chrome);
 
-                        Debug.WriteLine(start[i].GetAttribute("id"));
-                        Debug.WriteLine(start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).GetAttribute("id"));
+                        _logger.Debug(start[i].GetAttribute("id"));
+                        _logger.Debug(start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).GetAttribute("id"));
                         if (start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).GetAttribute("value") != "")
                         {
                             kintai.StrTime = start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).GetAttribute("value");
                             kintai.strID = start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).GetAttribute("id");
                         }
 
-                        Debug.WriteLine(start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).Text);
+                        _logger.Debug(start[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeStart")).Text);
                         if (end[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeEnd")).GetAttribute("value") != "")
                         {
                             kintai.EndTime = end[i].FindElement(By.Id($"chartDto.attendanceDtos[{i - 1}].worktimeEnd")).GetAttribute("value");
@@ -317,7 +317,7 @@ namespace KintaiAuto.Controllers
         {
             var img = _tr.FindElement(By.TagName("img"));
             img.Click();
-
+            ChromeDriverUtil.sleep();
 
             var kyustr = wait.Until(drv => drv.FindElement(By.Id("breaktimeDtos[0].breaktimeStart")));
             kyustr.Clear();
@@ -345,6 +345,7 @@ namespace KintaiAuto.Controllers
                 close.Click();
 
             }
+            ChromeDriverUtil.sleep();
         }
         #endregion
 
@@ -373,7 +374,7 @@ namespace KintaiAuto.Controllers
                 var editpage = wait.Until(drv => drv.FindElements(By.LinkText("交通費精算"))[1]);
                 editpage.Click();
 
-
+                ChromeDriverUtil.sleep();
 
                 var window = wait.Until(drv => drv.WindowHandles.Last());
                 wait.Until(drv => drv.SwitchTo().Window(window));
@@ -391,7 +392,7 @@ namespace KintaiAuto.Controllers
                     editpage = wait.Until(drv => drv.FindElement(By.ClassName("w_denpyo_l")));
                     editpage.Click();
                 }
-
+                ChromeDriverUtil.sleep();
                 var meisaiWindow = wait.Until(drv => drv.WindowHandles.Last());
                 wait.Until(drv => drv.SwitchTo().Window(meisaiWindow));
                 _logger.Info("楽楽清算-通勤費画面");
@@ -403,7 +404,7 @@ namespace KintaiAuto.Controllers
                 editpage = wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"meisai-insert-button\"]"))[1]);
                 editpage.Click();
 
-
+                ChromeDriverUtil.sleep();
 
                 window = wait.Until(drv => drv.WindowHandles.Last());
                 wait.Until(drv => drv.SwitchTo().Window(window));
@@ -459,7 +460,7 @@ namespace KintaiAuto.Controllers
                             nextbtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"button button--l button-primary accesskeyFix kakutei\"]")));
                             nextbtn.Click();
 
-
+                            ChromeDriverUtil.sleep();
                             //window = wait.Until(drv => drv.WindowHandles.Last());
                             wait.Until(drv => drv.SwitchTo().Window(meisaiWindow));
 
@@ -470,7 +471,7 @@ namespace KintaiAuto.Controllers
                                 editpage = wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"meisai-insert-button\"]"))[1]);
                                 editpage.Click();
 
-
+                                ChromeDriverUtil.sleep();
 
                                 window = wait.Until(drv => drv.WindowHandles.Last());
                                 wait.Until(drv => drv.SwitchTo().Window(window));
@@ -506,7 +507,7 @@ namespace KintaiAuto.Controllers
                             nextbtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"button button--l button-primary accesskeyFix kakutei\"]")));
                             nextbtn.Click();
 
-
+                            ChromeDriverUtil.sleep();
                             //window = wait.Until(drv => drv.WindowHandles.Last());
                             wait.Until(drv => drv.SwitchTo().Window(meisaiWindow));
 
@@ -532,7 +533,7 @@ namespace KintaiAuto.Controllers
                     {
                         var closebtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"common-btn accesskeyClose\"]")));
                         closebtn.Click();
-
+                        ChromeDriverUtil.sleep();
                         window = wait.Until(drv => drv.WindowHandles.Last());
                         wait.Until(drv => drv.SwitchTo().Window(window));
                     }
@@ -544,7 +545,7 @@ namespace KintaiAuto.Controllers
                         savebtn.Click();
                     }
                 }
-
+                ChromeDriverUtil.sleep();
                 ChromeDriverUtil.ChromeEnd(chrome);
                 return new SelectList(list, "Id", "PtnName");
             }
@@ -571,6 +572,8 @@ namespace KintaiAuto.Controllers
 
             passElement.SendKeys(Keys.Enter);
 
+            ChromeDriverUtil.sleep();
+
 
             var frame = wait.Until(drv => drv.FindElement(By.Name("main")));
             chrome.SwitchTo().Frame(frame);
@@ -596,10 +599,13 @@ namespace KintaiAuto.Controllers
             passElement.SendKeys(recolu.PASS);
             passElement.SendKeys(Keys.Enter);
 
+            ChromeDriverUtil.sleep();
+
             //勤務表へ移動
             var editpage = wait.Until(drv => drv.FindElement(By.LinkText("勤務表")));
 
             editpage.Click();
+            ChromeDriverUtil.sleep();
 
         }
         #endregion
