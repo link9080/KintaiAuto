@@ -451,7 +451,7 @@ namespace KintaiAuto.Controllers
                             var nextbtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"common-btn accesskeyFix kakutei d_marginLeft5\"]")));
                             nextbtn.Click();
 
-
+                            ChromeDriverUtil.sleep();
                             //日付入力meisaiDate
                             var Dateinput = wait.Until(drv => drv.FindElements(By.Name("meisaiDate"))[1]);
                             Dateinput.SendKeys(model.Kintais[i].Date.ToString("d"));
@@ -497,12 +497,12 @@ namespace KintaiAuto.Controllers
                             var nextbtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"common-btn accesskeyFix kakutei d_marginLeft5\"]")));
                             nextbtn.Click();
 
-
+                            ChromeDriverUtil.sleep();
 
                             //日付入力meisaiDate
                             var Dateinput = wait.Until(drv => drv.FindElements(By.Name("meisaiDate"))[1]);
                             Dateinput.SendKeys(model.Kintais[i].Date.ToString("d"));
-
+                            ChromeDriverUtil.sleep();
                             //明細追加押下
                             nextbtn = wait.Until(drv => drv.FindElement(By.CssSelector("[class=\"button button--l button-primary accesskeyFix kakutei\"]")));
                             nextbtn.Click();
@@ -518,7 +518,7 @@ namespace KintaiAuto.Controllers
                                 editpage = wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"meisai-insert-button\"]"))[1]);
                                 editpage.Click();
 
-
+                                ChromeDriverUtil.sleep();
 
                                 window = wait.Until(drv => drv.WindowHandles.Last());
                                 wait.Until(drv => drv.SwitchTo().Window(window));
