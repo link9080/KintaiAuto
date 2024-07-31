@@ -244,6 +244,13 @@ namespace KintaiAuto.Controllers
                     {
                         kintai.Date = DateTime.Parse(Days[i].Text);
                         _logger.Info(kintai.Date);
+                        if(wait.Until(drv => drv.FindElements(By.CssSelector($"[class='{TR_CLASS + kintai.Date.ToString("yyyyMMdd")} approved']"))).Any())
+                        {
+                            ChromeDriverUtil.ChromeEnd(chrome);
+                            ViewData["ErrorMessage"] = $"Recolu:{kintai.Date.ToString("Y")}は既に締められています。";
+
+                            return model;
+                        }
 
                         var _tr = wait.Until(drv => drv.FindElement(By.CssSelector($"[class='{TR_CLASS + kintai.Date.ToString("yyyyMMdd")}']")));
 
