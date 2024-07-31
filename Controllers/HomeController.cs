@@ -209,7 +209,7 @@ namespace KintaiAuto.Controllers
             var model = new KintaiView();
             model.Kintais = new List<Kintai>();
             var raku = rakuPtn();
-            _logger.Info(raku.First().Text);
+            //_logger.Info(raku.First().Text);
             if (raku == null)
             {
                 ViewData["ErrorMessage"] = "楽楽精算のページで今月の交通費精算を作成してください。";
@@ -367,6 +367,7 @@ namespace KintaiAuto.Controllers
                 {
                     //交通費精算作られていない場合
                     ChromeDriverUtil.ChromeEnd(chrome);
+                    _logger.Debug("楽楽精算未作成");
                     return null;
 
                 }

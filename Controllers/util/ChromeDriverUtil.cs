@@ -51,7 +51,7 @@ namespace KintaiAuto.Controllers.util
             }
             else
             {
-                Thread.Sleep(TimeSpan.FromSeconds(2));
+                Thread.Sleep(TimeSpan.FromSeconds(1));
             }
         }
 
