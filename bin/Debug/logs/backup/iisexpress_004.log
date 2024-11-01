@@ -1,0 +1,142 @@
+﻿2024-07-30 21:23:44.0975 INFO  [10] KintaiAuto.Controllers.HomeController - ログイン情報読込 
+2024-07-30 21:23:44.2175 INFO  [10] KintaiAuto.Controllers.HomeController - oyama.shota@alhinc.jp 
+2024-07-30 21:23:48.9615 INFO  [10] KintaiAuto.Controllers.HomeController - 楽楽清算ログイン成功 
+2024-07-30 21:23:50.1461 INFO  [10] KintaiAuto.Controllers.HomeController - 楽楽清算-一時保存 
+2024-07-30 21:23:51.2879 INFO  [10] KintaiAuto.Controllers.HomeController - 楽楽清算-通勤費画面 
+2024-07-30 21:23:53.8554 DEBUG [10] KintaiAuto.Controllers.util.ChromeDriverUtil - chrome終了 
+2024-07-30 21:23:53.9904 INFO  [10] KintaiAuto.Controllers.HomeController - 電車（国内） / 柚須 ＞ 博多 
+2024-07-30 21:23:58.6355 INFO  [10] KintaiAuto.Controllers.HomeController - recoluログイン成功 
+2024-07-30 21:23:58.6494 INFO  [10] KintaiAuto.Controllers.HomeController - 32 
+2024-07-30 21:23:58.9478 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/01 0:00:00 
+2024-07-30 21:23:58.9618 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240701-1 
+2024-07-30 21:23:58.9750 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[0].worktimeStart 
+2024-07-30 21:23:59.0161 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:23:59.0618 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/02 0:00:00 
+2024-07-30 21:23:59.0618 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240702-1 
+2024-07-30 21:23:59.0865 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[1].worktimeStart 
+2024-07-30 21:23:59.1295 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:23:59.1723 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/03 0:00:00 
+2024-07-30 21:23:59.1723 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240703-1 
+2024-07-30 21:23:59.1963 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[2].worktimeStart 
+2024-07-30 21:23:59.2406 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:23:59.2851 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/04 0:00:00 
+2024-07-30 21:23:59.2983 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240704-1 
+2024-07-30 21:23:59.3113 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[3].worktimeStart 
+2024-07-30 21:23:59.3493 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:23:59.3921 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/05 0:00:00 
+2024-07-30 21:23:59.3921 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240705-1 
+2024-07-30 21:23:59.4163 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[4].worktimeStart 
+2024-07-30 21:23:59.4627 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:23:59.5059 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/06 0:00:00 
+2024-07-30 21:23:59.5195 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240706-1 
+2024-07-30 21:23:59.5319 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[5].worktimeStart 
+2024-07-30 21:23:59.5534 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:23:59.5784 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/07 0:00:00 
+2024-07-30 21:23:59.5784 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240707-1 
+2024-07-30 21:23:59.6024 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[6].worktimeStart 
+2024-07-30 21:23:59.6235 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:23:59.6477 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/08 0:00:00 
+2024-07-30 21:23:59.6598 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240708-1 
+2024-07-30 21:23:59.6739 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[7].worktimeStart 
+2024-07-30 21:23:59.7141 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:23:59.7688 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/09 0:00:00 
+2024-07-30 21:23:59.7825 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240709-1 
+2024-07-30 21:23:59.7964 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[8].worktimeStart 
+2024-07-30 21:23:59.8374 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:23:59.8831 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/10 0:00:00 
+2024-07-30 21:23:59.8960 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240710-1 
+2024-07-30 21:23:59.9083 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[9].worktimeStart 
+2024-07-30 21:23:59.9492 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:23:59.9922 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/11 0:00:00 
+2024-07-30 21:24:00.0049 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240711-1 
+2024-07-30 21:24:00.0181 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[10].worktimeStart 
+2024-07-30 21:24:00.0603 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:00.1065 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/12 0:00:00 
+2024-07-30 21:24:00.1182 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240712-1 
+2024-07-30 21:24:00.1297 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[11].worktimeStart 
+2024-07-30 21:24:00.1722 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:00.2146 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/13 0:00:00 
+2024-07-30 21:24:00.2263 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240713-1 
+2024-07-30 21:24:00.2388 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[12].worktimeStart 
+2024-07-30 21:24:00.2588 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:00.2832 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/14 0:00:00 
+2024-07-30 21:24:00.2954 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240714-1 
+2024-07-30 21:24:00.2954 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[13].worktimeStart 
+2024-07-30 21:24:00.3286 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:00.3535 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/15 0:00:00 
+2024-07-30 21:24:00.3660 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240715-1 
+2024-07-30 21:24:00.3786 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[14].worktimeStart 
+2024-07-30 21:24:00.3990 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:00.4223 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/16 0:00:00 
+2024-07-30 21:24:00.4223 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240716-1 
+2024-07-30 21:24:00.4466 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[15].worktimeStart 
+2024-07-30 21:24:00.4865 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:00.5305 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/17 0:00:00 
+2024-07-30 21:24:00.5305 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240717-1 
+2024-07-30 21:24:00.5547 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[16].worktimeStart 
+2024-07-30 21:24:00.5965 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:00.6385 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/18 0:00:00 
+2024-07-30 21:24:00.6499 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240718-1 
+2024-07-30 21:24:00.6627 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[17].worktimeStart 
+2024-07-30 21:24:00.7027 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:00.7494 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/19 0:00:00 
+2024-07-30 21:24:00.7641 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240719-1 
+2024-07-30 21:24:00.7641 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[18].worktimeStart 
+2024-07-30 21:24:00.8229 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:00.8730 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/20 0:00:00 
+2024-07-30 21:24:00.8730 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240720-1 
+2024-07-30 21:24:00.8977 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[19].worktimeStart 
+2024-07-30 21:24:00.9238 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:00.9498 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/21 0:00:00 
+2024-07-30 21:24:00.9637 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240721-1 
+2024-07-30 21:24:00.9785 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[20].worktimeStart 
+2024-07-30 21:24:01.0020 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:01.0291 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/22 0:00:00 
+2024-07-30 21:24:01.0426 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240722-1 
+2024-07-30 21:24:01.0565 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[21].worktimeStart 
+2024-07-30 21:24:01.0998 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:01.1469 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/23 0:00:00 
+2024-07-30 21:24:01.1596 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240723-1 
+2024-07-30 21:24:01.1724 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[22].worktimeStart 
+2024-07-30 21:24:01.2146 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:01.2588 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/24 0:00:00 
+2024-07-30 21:24:01.2716 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240724-1 
+2024-07-30 21:24:01.2860 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[23].worktimeStart 
+2024-07-30 21:24:01.3317 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:01.3745 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/25 0:00:00 
+2024-07-30 21:24:01.3745 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240725-1 
+2024-07-30 21:24:01.4014 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[24].worktimeStart 
+2024-07-30 21:24:01.4419 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:01.4842 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/26 0:00:00 
+2024-07-30 21:24:01.4842 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240726-1 
+2024-07-30 21:24:01.5080 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[25].worktimeStart 
+2024-07-30 21:24:01.5488 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:01.5927 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/27 0:00:00 
+2024-07-30 21:24:01.5927 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240727-1 
+2024-07-30 21:24:01.6205 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[26].worktimeStart 
+2024-07-30 21:24:01.6429 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:01.6681 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/28 0:00:00 
+2024-07-30 21:24:01.6800 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240728-1 
+2024-07-30 21:24:01.6922 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[27].worktimeStart 
+2024-07-30 21:24:01.7129 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:01.7393 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/29 0:00:00 
+2024-07-30 21:24:01.7517 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240729-1 
+2024-07-30 21:24:01.7644 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[28].worktimeStart 
+2024-07-30 21:24:01.8032 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:01.8502 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/30 0:00:00 
+2024-07-30 21:24:01.8636 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240730-1 
+2024-07-30 21:24:01.8760 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[29].worktimeStart 
+2024-07-30 21:24:01.9152 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:01.9614 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/31 0:00:00 
+2024-07-30 21:24:01.9735 DEBUG [10] KintaiAuto.Controllers.HomeController - ID-worktimeStart-20240731-1 
+2024-07-30 21:24:01.9856 DEBUG [10] KintaiAuto.Controllers.HomeController - chartDto.attendanceDtos[30].worktimeStart 
+2024-07-30 21:24:02.0277 DEBUG [10] KintaiAuto.Controllers.HomeController -  
+2024-07-30 21:24:02.0610 DEBUG [10] KintaiAuto.Controllers.util.ChromeDriverUtil - chrome終了 
+2024-07-30 21:24:02.1780 INFO  [10] KintaiAuto.Controllers.HomeController - 31 
+2024-07-30 21:25:06.3423 INFO  [30] KintaiAuto.Controllers.HomeController - 31 
+2024-07-30 21:25:10.3412 INFO  [30] KintaiAuto.Controllers.HomeController - 楽楽清算ログイン成功 
+2024-07-30 21:25:11.5199 INFO  [30] KintaiAuto.Controllers.HomeController - 楽楽清算-一時保存 
+2024-07-30 21:25:12.6657 INFO  [30] KintaiAuto.Controllers.HomeController - 楽楽清算-通勤費画面 
+2024-07-30 21:25:16.9712 DEBUG [30] KintaiAuto.Controllers.util.ChromeDriverUtil - chrome終了 
+2024-07-30 21:25:21.5574 INFO  [30] KintaiAuto.Controllers.HomeController - recoluログイン情報読込 
+2024-07-30 21:25:23.8958 DEBUG [30] KintaiAuto.Controllers.util.ChromeDriverUtil - chrome終了 

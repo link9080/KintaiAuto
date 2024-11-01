@@ -373,14 +373,17 @@ namespace KintaiAuto.Controllers
                 if (wait.Until(drv => drv.FindElements(By.LinkText("交通費精算"))).Count() == 1)
                 {
                     //交通費精算作られていない場合
-                    ChromeDriverUtil.ChromeEnd(chrome);
                     _logger.Debug("楽楽精算未作成");
-                    return null;
+                    var newpage = wait.Until(drv => drv.FindElements(By.LinkText("交通費精算"))[0]);
+                    newpage.Click();
 
                 }
+                else
+                {
 
-                var editpage = wait.Until(drv => drv.FindElements(By.LinkText("交通費精算"))[1]);
-                editpage.Click();
+                    var temppage = wait.Until(drv => drv.FindElements(By.LinkText("交通費精算"))[1]);
+                    temppage.Click();
+                }
 
                 ChromeDriverUtil.sleep();
 
@@ -389,27 +392,35 @@ namespace KintaiAuto.Controllers
                 _logger.Info("楽楽清算-一時保存");
 
                 //修正クリックw_denpyo_l
-                if (chrome.FindElements(By.LinkText("修正")).Count() > 0)
+                var meisaiWindow = wait.Until(drv => drv.WindowHandles.Last());
+                if (!chrome.Url.Contains("initializeView"))
                 {
-                    editpage = wait.Until(drv => drv.FindElement(By.LinkText("修正")));
-                    editpage.Click();
+                    if (chrome.FindElements(By.LinkText("修正")).Count() > 0)
+                    {
+                        var syuseipage = wait.Until(drv => drv.FindElement(By.LinkText("修正")));
+                        syuseipage.Click();
 
+                    }
+                    else
+                    {
+                        var seditpage = wait.Until(drv => drv.FindElement(By.ClassName("w_denpyo_l")));
+                        seditpage.Click();
+                    }
+                    ChromeDriverUtil.sleep();
+                    meisaiWindow = wait.Until(drv => drv.WindowHandles.Last());
+                    wait.Until(drv => drv.SwitchTo().Window(meisaiWindow));
                 }
                 else
                 {
-                    editpage = wait.Until(drv => drv.FindElement(By.ClassName("w_denpyo_l")));
-                    editpage.Click();
+                    meisaiWindow = window;
                 }
-                ChromeDriverUtil.sleep();
-                var meisaiWindow = wait.Until(drv => drv.WindowHandles.Last());
-                wait.Until(drv => drv.SwitchTo().Window(meisaiWindow));
                 _logger.Info("楽楽清算-通勤費画面");
                 //すでに作成済みの日付を取得
                 var daylists = wait.Until(drv => drv.FindElements(By.ClassName("labelColorDefault")));
                 daylist.AddRange(daylists.Select(r => r.Text));
 
                 //マイパターンクリック
-                editpage = wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"meisai-insert-button\"]"))[1]);
+                var  editpage = wait.Until(drv => drv.FindElements(By.CssSelector("[class=\"meisai-insert-button\"]"))[1]);
                 editpage.Click();
 
                 ChromeDriverUtil.sleep();

@@ -1,0 +1,9 @@
+﻿2024-07-31 21:48:33.7638 INFO  [10] KintaiAuto.Controllers.HomeController - ログイン情報読込 
+2024-07-31 21:48:33.8901 INFO  [10] KintaiAuto.Controllers.HomeController - oyama.shota@alhinc.jp 
+2024-07-31 21:48:38.7517 INFO  [10] KintaiAuto.Controllers.HomeController - 楽楽清算ログイン成功 
+2024-07-31 21:48:39.9353 INFO  [10] KintaiAuto.Controllers.HomeController - 楽楽清算-一時保存 
+2024-07-31 21:48:41.0780 INFO  [10] KintaiAuto.Controllers.HomeController - 楽楽清算-通勤費画面 
+2024-07-31 21:48:43.4087 DEBUG [10] KintaiAuto.Controllers.util.ChromeDriverUtil - chrome終了 
+2024-07-31 21:48:47.8744 INFO  [10] KintaiAuto.Controllers.HomeController - recoluログイン成功 
+2024-07-31 21:48:47.8892 INFO  [10] KintaiAuto.Controllers.HomeController - 32 
+2024-07-31 21:48:48.1850 INFO  [10] KintaiAuto.Controllers.HomeController - 2024/07/01 0:00:00 
