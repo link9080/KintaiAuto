@@ -322,8 +322,15 @@ namespace KintaiAuto.Controllers
 
         private void breakTimewrite(IWebElement _tr, Kintai _kintai, ChromeDriver chrome,WebDriverWait wait)
         {
-            var img = _tr.FindElements(By.TagName("img"));
-            img[1].Click();
+            var breakTime = _tr.FindElement(By.CssSelector($"[class='ow btn-edit tip']"));
+            var img = breakTime.FindElements(By.TagName("img"));
+            if(img.Count != 1) {
+                img[1].Click(); 
+            } else
+            {
+                img[0].Click();
+            }
+            
             ChromeDriverUtil.sleep();
 
             var kyustr = wait.Until(drv => drv.FindElement(By.Id("breaktimeDtos[0].breaktimeStart")));
